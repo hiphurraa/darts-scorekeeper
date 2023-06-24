@@ -10,13 +10,9 @@ Vue.component('NavigationHeader', {
     <header>
         <a :href="previous" class="previous-page">
             <router-link :to="previous">
-                <img v-if="theme === 'dark'" src="images/back-dark.png"/>            
-            </router-link>
-            
-            <router-link :to="previous">
+                <img v-if="theme === 'dark'" src="images/back-dark.png"/>
                 <img v-else src="images/back-light.png"/>            
-            </router-link>
-            
+            </router-link>  
         </a>
         <div class="title">{{ title }}</div>    
     </header>

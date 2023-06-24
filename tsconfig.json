@@ -5,7 +5,7 @@
   },
   "files": [
     /* Libraries */
-    "lib/vue.min.js",
+    "lib/vue.js",
     "lib/vue-router.min.js",
 
     /* Global state */
@@ -14,6 +14,7 @@
 
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",
+    "src/global/components/CustomRadio/CustomRadio.ts",
 
     /* Page: mainmenu */
     "src/pages/mainmenu/mainmenu.ts",
