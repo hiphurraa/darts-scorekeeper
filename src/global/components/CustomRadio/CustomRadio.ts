@@ -17,9 +17,6 @@ Vue.component('CustomRadio', {
             </div>
         </div>
     </div>`,
-    mounted () {
-        console.log({mounted: this.options});
-    },
     methods: {
         onSelected (option) {
             this.options.forEach((item) => {

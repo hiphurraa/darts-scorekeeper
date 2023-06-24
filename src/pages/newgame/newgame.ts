@@ -45,15 +45,15 @@ const newgame_page = Vue.component('newgame_page', {
         }
     },
     watch: {
-        startingPoints(startingPoints) {
-            if (startingPoints === null) {
+        startingPoints(startingPoints, old) {
+            if (startingPoints === null || old === null) {
                 return;
             }
             gameSettings.startingPoints = startingPoints
             saveGameSettings();
         },
-        startsWithDouble(startsWithDouble) {
-            if (startsWithDouble === null) {
+        startsWithDouble(startsWithDouble, old) {
+            if (startsWithDouble === null || old === null) {
                 return;
             }
             gameSettings.startsWithDouble = startsWithDouble;

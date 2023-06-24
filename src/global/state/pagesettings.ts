@@ -31,4 +31,5 @@ let pageSettings: PageSettings = loadPageSettings();
 
 function savePageSettings () {
     localStorage.setItem(PAGE_SETTINGS, JSON.stringify(pageSettings));
+    location.reload();
 }
