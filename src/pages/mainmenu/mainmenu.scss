@@ -1,0 +1,29 @@
+.page-mainmenu {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+  .header {
+    font-size: 10vmin;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 7vmin;
+
+    span:nth-child(2) {
+      font-size: 7vmin;
+    }
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

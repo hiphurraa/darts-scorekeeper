@@ -1,0 +1,38 @@
+.component-navigation-header {
+
+  .spacemaker {
+    height: 17vmin;
+  }
+
+  header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 15vmin;
+    box-shadow: 0 0 3vmin var(--shadow-color);
+    background-color: var(--navbar-color);
+    top: 0;
+    left: 0;
+    right: 0;
+
+    a.previous-page {
+      position: absolute;
+      top: 50%;
+      left: 3vmin;
+      transform: translateY(-50%);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    a.previous-page img {
+      width: 10vmin;
+    }
+
+    .title {
+      font-size: 7vmin;
+    }
+  }
+}

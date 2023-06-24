@@ -1,0 +1,31 @@
+{
+  "name": "darts-scorekeeper",
+  "version": "1.0.0",
+  "description": "Scorekeeping app for the game of Darts",
+  "main": "src/app.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "sass src/imports.scss dist/bundle.css && tsc && cp src/index.html dist/index.html & cp -r src/images/ dist/images/",
+    "dev": "nodemon"
+  },
+  "author": "Tomi Heikkala",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "sass": "^1.63.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/**/*"
+    ],
+    "ext": "ts,scss",
+    "exec": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

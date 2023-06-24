@@ -1,0 +1,58 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: black;
+  --selected-color: #0033ff;
+  --container-bg: whitesmoke;
+  --button-bg: #f5f5f5;
+  --button-color: black;
+  --navbar-color: #ffffff;
+  --shadow-color: rgba(152, 149, 149, 0.91);
+  --option-bg: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --background-color: #313131;
+  --text-color: white;
+  --selected-color: #0033ff;
+  --container-bg: #363636;
+  --button-bg: #000000;
+  --button-color: #ffffff;
+  --navbar-color: #212121;
+  --shadow-color: rgba(0, 0, 0, 0.91);
+  --option-bg: black;
+}
+
+html {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.button-s,
+.button-m,
+.button-l {
+  background-color: var(--button-bg);
+  color: var(--button-color);
+  text-decoration: none;
+  border: solid 0.75vmin black;
+  padding: 3vmin 5vmin;
+  border-radius: 2vmin;
+  margin-bottom: 3vmin;
+  text-align: center;
+
+  * {
+    text-decoration: none;
+    color: var(--button-color);
+  }
+}
+
+.button-s {
+  font-size: 4vmin;
+}
+
+.button-m {
+  font-size: 5vmin;
+}
+
+.button-l {
+  font-size: 7vmin;
+}
