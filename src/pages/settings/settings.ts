@@ -1,6 +1,6 @@
 const settings_page = Vue.component('settings_page', {
     template: `<div>
-        <NavigationHeader title="Settings" previous="/"></NavigationHeader>
+        <NavigationHeader title="Asetukset" previous="/"></NavigationHeader>
         <div>
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>

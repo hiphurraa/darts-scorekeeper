@@ -1,17 +1,36 @@
 const newgame_page = Vue.component('newgame_page', {
-    template: `<div>
-    <NavigationHeader title="New game" previous="/"></NavigationHeader>
+    template: `<div class="page-newgame">
+    <NavigationHeader title="Uusi peli" previous="/"></NavigationHeader>
     
-    <div class="gamesettings-menu">
-        <CustomRadio title="Aloituspisteet" :options="startingPointsOptions" 
-            @selected="(o) => {startingPointsOptions = o}">
-        </CustomRadio>
-        <CustomRadio title="Alkaa tuplalla" :options="startsWithDoubleOptions" 
-            @selected="(o) => {startsWithDoubleOptions = o}">
-        </CustomRadio>
+    <div class="gamesettings-menu" :class="sliderPosition">
+        <div class="menu-section">
+            <CustomRadio title="Aloituspisteet" :options="startingPointsOptions" 
+                @selected="(o) => {startingPointsOptions = o}">
+            </CustomRadio>
+            <CustomRadio title="Alkaa tuplalla" :options="startsWithDoubleOptions" 
+                @selected="(o) => {startsWithDoubleOptions = o}">
+            </CustomRadio>
+        </div>
+        
+        <div class="menu-section">
+            <CustomRadio title="Aloituspisteet 2" :options="startingPointsOptions" 
+                @selected="(o) => {startingPointsOptions = o}">
+            </CustomRadio>
+            <CustomRadio title="Alkaa tuplalla 2" :options="startsWithDoubleOptions"
+                @selected="(o) => {startsWithDoubleOptions = o}">
+            </CustomRadio>
+        </div>    
     </div>
     
+    
+    <div class="button-m continue" @click="toggle">Jatka</div>
+    
     </div>`,
+    methods: {
+        toggle() {
+            this.sliderPosition === 'two'? this.sliderPosition = 'one' : this.sliderPosition = 'two';
+        }
+    },
     data() {
         return {
             startsWithDoubleOptions: [
@@ -21,7 +40,8 @@ const newgame_page = Vue.component('newgame_page', {
             startingPointsOptions: [
                 {selected: false, label: "501", value: 501},
                 {selected: false, label: "301", value: 301}
-            ]
+            ],
+            sliderPosition: 'one',
         };
     },
     mounted() {

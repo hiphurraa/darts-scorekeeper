@@ -3,7 +3,7 @@
   --text-color: black;
   --selected-color: #0033ff;
   --container-bg: whitesmoke;
-  --button-bg: #f5f5f5;
+  --button-bg: #dddddd;
   --button-color: black;
   --navbar-color: #ffffff;
   --shadow-color: rgba(152, 149, 149, 0.91);
@@ -33,7 +33,6 @@ html {
   background-color: var(--button-bg);
   color: var(--button-color);
   text-decoration: none;
-  border: solid 0.75vmin black;
   padding: 3vmin 5vmin;
   border-radius: 2vmin;
   margin-bottom: 3vmin;
