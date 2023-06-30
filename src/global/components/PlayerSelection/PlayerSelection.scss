@@ -1,0 +1,56 @@
+/*
+.page-playerselection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .player-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--container-bg);
+
+    .player {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 6vmin;
+      padding: 3vmin;
+
+      &.selected {
+        background-color: var(--selected-bg-color);
+      }
+
+
+      .selection {
+        width: 7vmin;
+        height: 7vmin;
+        border-radius: 2vmin;
+        background-color: var(--selection-bg-color);
+
+        &.selected {
+          background-color: var(--selected-color);
+        }
+      }
+
+      .name {
+
+      }
+
+      .spacer {
+        width: 7vmin;
+      }
+    }
+  }
+
+  .header {
+    font-size: 5vmin;
+    margin: 3vmin;
+  }
+
+  .new-player-btn {
+    margin-top: 5vmin;
+  }
+}*/

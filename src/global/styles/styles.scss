@@ -1,30 +1,64 @@
 :root {
+  --nav-height: 20vmin;
   --background-color: #ffffff;
   --text-color: black;
   --selected-color: #0033ff;
-  --container-bg: whitesmoke;
+  --container-bg: #f7f7f7;
   --button-bg: #dddddd;
   --button-color: black;
   --navbar-color: #ffffff;
-  --shadow-color: rgba(152, 149, 149, 0.91);
+  --shadow-color: rgba(215 215 215, 0.91);
   --option-bg: #ffffff;
+  --disabled-btn-bg: #e1e1e1;
+  --disabled-btn-color: #b5b5b5;
+  --select-border-color: black;
+  --selection-bg-color: #dddddd;
+  --selected-bg-color: #d4e1ff;
+  --border-color: #e7e7e7;
+  --default-btn-bg: #0030f3;
+  --default-btn-color: #ffffff;
+  --secondary-btn-bg: #cfcfcf;
+  --secondary-btn-color: #000000;
 }
 
 :root[data-theme='dark'] {
   --background-color: #313131;
   --text-color: white;
-  --selected-color: #0033ff;
+  --selected-color: #7700ff;;
   --container-bg: #363636;
   --button-bg: #000000;
   --button-color: #ffffff;
   --navbar-color: #212121;
   --shadow-color: rgba(0, 0, 0, 0.91);
   --option-bg: black;
+  --disabled-btn-bg: #202020;
+  --disabled-btn-color: #525252;
+  --selection-bg-color: #494949;
+  --selected-bg-color: #362c6b;
+  --border-color: #494949;
+  --default-btn-bg: #6200d1;
+  --default-btn-color: #ffffff;
+  --secondary-btn-bg: #515151;
+  --secondary-btn-color: #ffffff;
 }
 
 html {
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  overscroll-behavior: contain;
+}
+
+* {
+  user-select: none;
+  box-sizing: border-box;
 }
 
 .button-s,
@@ -40,12 +74,31 @@ html {
 
   * {
     text-decoration: none;
-    color: var(--button-color);
+  }
+
+  &.default {
+    background-color: var(--default-btn-bg);
+    color: var(--default-btn-color);
+  }
+
+  &.secondary {
+    background-color: var(--secondary-btn-bg);
+    color: var(--secondary-btn-color);
+  }
+
+  &:disabled,
+  &.disabled {
+    background-color: var(--disabled-btn-bg);
+    color: var(--disabled-btn-color);
+
+    * {
+      color: var(--disabled-btn-color);
+    }
   }
 }
 
 .button-s {
-  font-size: 4vmin;
+  font-size: 5vmin;
 }
 
 .button-m {
@@ -54,4 +107,13 @@ html {
 
 .button-l {
   font-size: 7vmin;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.page-content {
+  padding: 2vmin;
+  width: 100%;
 }

@@ -1,16 +1,16 @@
-const PAGE_SETTINGS: string = "darts-scorekeeper-pagesettings";
+const PAGE_SETTINGS: string = "darts-scorekeeper-application-settings";
 
-declare interface PageSettings {
+declare interface ApplicationSettings {
     theme: string,
     language: string
 }
 
-const defaultPageSettings: PageSettings = {
+const defaultPageSettings: ApplicationSettings = {
     theme: 'dark',
-    language: 'en'
+    language: 'fi'
 }
 
-function loadPageSettings (): PageSettings {
+function loadApplicationSettings (): ApplicationSettings {
     let pageSettings = defaultPageSettings;
 
     let local = localStorage.getItem(PAGE_SETTINGS);
@@ -18,7 +18,7 @@ function loadPageSettings (): PageSettings {
         try {
             pageSettings = JSON.parse(local);
         } catch(error) {
-            console.error("Page settings corrupted, restoring default settings");
+            console.error("Application settings corrupted, restoring default settings.");
         }
     }
 
@@ -27,7 +27,7 @@ function loadPageSettings (): PageSettings {
     return pageSettings;
 }
 
-let pageSettings: PageSettings = loadPageSettings();
+let pageSettings: ApplicationSettings = loadApplicationSettings();
 
 function savePageSettings () {
     localStorage.setItem(PAGE_SETTINGS, JSON.stringify(pageSettings));

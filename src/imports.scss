@@ -1,7 +1,16 @@
 @use 'global/styles/styles';
+
+/* Components */
 @use 'global/components/NavigationHeader/NavigationHeader';
 @use 'global/components/CustomRadio/CustomRadio';
-@use 'pages/mainmenu/mainmenu';
-@use 'pages/newgame/newgame';
-@use 'pages/settings/settings';
+@use 'global/components/PlayerSelection/PlayerSelection';
+
+/* Routes */
+@use 'routes/mainmenu/mainmenu';
+@use 'routes/newgame/newgame';
+@use 'routes/settings/settings';
+@use 'routes/ingame/ingame';
+@use 'routes/addplayer/addplayer';
+@use "routes/playerselection/playerselection";
+
 

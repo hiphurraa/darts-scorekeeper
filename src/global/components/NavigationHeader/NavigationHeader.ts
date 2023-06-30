@@ -1,19 +1,18 @@
 Vue.component('NavigationHeader', {
     props: {
-        title: String,
-        previous: String
+        title: String, // title to be shown on the header
+        previousExecute: () => {}, // method, if provided, overrides default functionality when clicking back btn
     },
     template: `<div class="component-navigation-header">
 
     <div class="spacemaker"></div>
     
     <header>
-        <a :href="previous" class="previous-page">
-            <router-link :to="previous">
+        <div class="previous-page" @click="onPrevious">
                 <img v-if="theme === 'dark'" src="images/back-dark.png"/>
-                <img v-else src="images/back-light.png"/>            
-            </router-link>  
-        </a>
+                <img v-else src="images/back-light.png"/>
+            </router-link>
+        </div>
         <div class="title">{{ title }}</div>    
     </header>
 
@@ -23,4 +22,13 @@ Vue.component('NavigationHeader', {
             theme: pageSettings.theme
         }
     },
+    methods: {
+        onPrevious() {
+            if (!!this.previousExecute) {
+                this.previousExecute();
+            } else {
+                router.back();
+            }
+        },
+    }
 });

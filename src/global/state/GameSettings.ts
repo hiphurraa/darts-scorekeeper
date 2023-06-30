@@ -1,13 +1,21 @@
-const GAME_SETTINGS: string = "darts-scorekeeper-gamesettings";
+const GAME_SETTINGS: string = "darts-scorekeeper-game-settings";
+
+declare interface Player {
+    id: number,
+    name: string
+    selected: boolean,
+}
 
 declare interface GameSettings {
     startingPoints: number,
     startsWithDouble: boolean
+    players: Player[],
 }
 
 const defaultGameSettings: GameSettings = {
     startingPoints: 501,
-    startsWithDouble: true
+    startsWithDouble: false,
+    players: [{id: 0, name: 'Tomi', selected: false}, {id: 0, name: 'Teppo', selected: false}, {id: 0, name: 'Pete', selected: false}]
 }
 
 function loadGameSettings (): GameSettings {

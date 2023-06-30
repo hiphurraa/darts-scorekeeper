@@ -1,7 +1,7 @@
 .component-navigation-header {
 
   .spacemaker {
-    height: 17vmin;
+    height: var(--nav-height);
   }
 
   header {
@@ -10,14 +10,14 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 15vmin;
+    height: calc(var(--nav-height) - 2vmin);
     box-shadow: 0 0 3vmin var(--shadow-color);
     background-color: var(--navbar-color);
     top: 0;
     left: 0;
     right: 0;
 
-    a.previous-page {
+    .previous-page {
       position: absolute;
       top: 50%;
       left: 3vmin;
@@ -27,7 +27,7 @@
       align-items: center;
     }
 
-    a.previous-page img {
+    .previous-page img {
       width: 10vmin;
     }
 

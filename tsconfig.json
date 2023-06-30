@@ -9,21 +9,21 @@
     "lib/vue-router.min.js",
 
     /* Global state */
-    "src/global/state/gamesettings.ts",
-    "src/global/state/pagesettings.ts",
+    "src/global/state/GameSettings.ts",
+    "src/global/state/ApplicationSettings.ts",
 
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",
     "src/global/components/CustomRadio/CustomRadio.ts",
+    "src/global/components/PlayerSelection/PlayerSelection.ts",
 
-    /* Page: mainmenu */
-    "src/pages/mainmenu/mainmenu.ts",
-
-    /* Page: newgame */
-    "src/pages/newgame/newgame.ts",
-
-    /* Page: settings */
-    "src/pages/settings/settings.ts",
+    /* Pages */
+    "src/routes/mainmenu/mainmenu.ts",
+    "src/routes/newgame/newgame.ts",
+    "src/routes/settings/settings.ts",
+    "src/routes/playerselection/playerselection.ts",
+    "src/routes/addplayer/addplayer.ts",
+    "src/routes/ingame/ingame.ts",
 
     /* Application */
     "src/app.ts"

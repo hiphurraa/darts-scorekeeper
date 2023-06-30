@@ -4,24 +4,16 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  position: relative;
+
 
   .gamesettings-menu {
-    width: 100%;
     display: flex;
-    transition: 0.3s;
-
-    &.two {
-      margin-left: -200%;
-    }
+    flex-direction: column;
 
     .menu-section {
-      flex-shrink: 0;
       width: 100%;
     }
   }
-
-
 
   .continue {
     margin-top: 5vmin;

@@ -4,9 +4,12 @@ declare const VueRouter: any;
 // Create a Vue Router instance
 const router = new VueRouter({
     routes: [ // @ts-ignore
-        {path: '/', component: mainmenu_page}, // @ts-ignore
-        {path: '/newgame', component: newgame_page}, // @ts-ignore
-        {path: '/settings', component: settings_page}, // @ts-ignore
+        {path: '/', component: route_mainmenu}, // @ts-ignore
+        {path: '/newgame', component: route_newgame}, // @ts-ignore
+        {path: '/playerselection', component: route_playerselection}, // @ts-ignore
+        {path: '/settings', component: route_settings}, // @ts-ignore
+        {path: '/ingame', component: route_ingame}, // @ts-ignore
+        {path: '/addplayer', component: route_addplayer}, // @ts-ignore
     ]
 });
 

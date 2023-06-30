@@ -1,7 +1,7 @@
-const settings_page = Vue.component('settings_page', {
+const route_settings = Vue.component('route_settings', {
     template: `<div>
-        <NavigationHeader title="Asetukset" previous="/"></NavigationHeader>
-        <div>
+        <NavigationHeader title="Asetukset"></NavigationHeader>
+        <div class="page-content">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
         </div>

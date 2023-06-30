@@ -1,0 +1,19 @@
+
+{
+  "short_name": "Darts Scorekeeper",
+  "name": "Darts Scorekeeper",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "images/darts-scorekeeper.png",
+      "type": "image/png",
+      "sizes": "200x200"
+    }
+  ],
+  "background_color": "#212121",
+  "theme_color": "#212121",
+  "scope": "/",
+  "description": "Scorekeeping aid for the game of Darts",
+  "orientation": "portrait-primary"
+}
