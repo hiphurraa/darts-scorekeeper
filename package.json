@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "sass src/imports.scss dist/bundle.css && tsc && cp src/static/index.html dist/index.html && cp -r src/static/images/ dist/images/ && cp src/static/manifest.json dist/manifest.json",
+    "build": "sass --no-source-map src/imports.scss dist/bundle.css && tsc && cp src/static/index.html dist/index.html && cp -r src/static/images/ dist/images/ && cp src/static/manifest.json dist/manifest.json",
     "dev": "nodemon"
   },
   "author": "Tomi Heikkala",
