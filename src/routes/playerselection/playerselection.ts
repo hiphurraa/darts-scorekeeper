@@ -32,6 +32,10 @@ const route_playerselection = Vue.component('route_playerselection', {
     methods: {
         startGame() {
             if (this.isGameSettingsValid) {
+                let selectedPlayers = gameSettings.players.filter((player: Player) => {
+                    return player.selected;
+                })
+                createNewGame(selectedPlayers);
                 this.$router.push('/ingame');
             }
         },

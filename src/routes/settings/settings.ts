@@ -4,6 +4,7 @@ const route_settings = Vue.component('route_settings', {
         <div class="page-content">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
+            <div style="margin-top: 10vmin;" class="button-s" @click="clearAll">Nollaa</div>
         </div>
     </div>`,
     data () {
@@ -20,11 +21,11 @@ const route_settings = Vue.component('route_settings', {
     },
     mounted () {
         this.themeOptions = this.themeOptions.map((option) => {
-            option.selected = pageSettings.theme === option.value;
+            option.selected = applicationSettings.theme === option.value;
             return option;
         });
         this.languageOptions = this.languageOptions.map((option) => {
-            option.selected = pageSettings.language === option.value;
+            option.selected = applicationSettings.language === option.value;
             return option;
         });
     },
@@ -43,17 +44,23 @@ const route_settings = Vue.component('route_settings', {
           if (theme === null || old === null) {
               return;
           }
-          pageSettings.theme = theme;
-          savePageSettings();
+          applicationSettings.theme = theme;
+          saveApplicationSettings();
       },
       language(language, old) {
           if (language === null || old === null) {
               return;
           }
-          pageSettings.language = language;
-          savePageSettings();
+          applicationSettings.language = language;
+          saveApplicationSettings();
       }
     },
     methods: {
+        clearAll() {
+            resetDefaultApplicationSettings();
+            resetDefaultCurrentGame();
+            resetDefaultGameSettings();
+            location.reload();
+        }
     }
 })

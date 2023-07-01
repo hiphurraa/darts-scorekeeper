@@ -15,14 +15,14 @@ declare interface GameSettings {
 const defaultGameSettings: GameSettings = {
     startingPoints: 501,
     startsWithDouble: false,
-    players: [{id: 0, name: 'Tomi', selected: false}, {id: 0, name: 'Teppo', selected: false}, {id: 0, name: 'Pete', selected: false}]
+    players: [{id: 0, name: 'Tomi', selected: false}, {id: 1, name: 'Teppo', selected: false}, {id: 2, name: 'Pete', selected: false}]
 }
 
 function loadGameSettings (): GameSettings {
-    let savedGameSettings = localStorage.getItem(GAME_SETTINGS);
-    if (savedGameSettings) {
+    let storageItem = localStorage.getItem(GAME_SETTINGS);
+    if (storageItem) {
         try {
-            return JSON.parse(savedGameSettings);
+            return JSON.parse(storageItem);
         } catch(error) {
             console.error("Game settings corrupted, restoring default settings");
         }
@@ -36,4 +36,8 @@ let gameSettings: GameSettings = loadGameSettings();
 
 function saveGameSettings () {
     localStorage.setItem(GAME_SETTINGS, JSON.stringify(gameSettings));
+}
+
+function resetDefaultGameSettings() {
+    localStorage.setItem(GAME_SETTINGS, JSON.stringify(defaultGameSettings));
 }

@@ -11,12 +11,11 @@
     /* Global state */
     "src/global/state/GameSettings.ts",
     "src/global/state/ApplicationSettings.ts",
-    "src/global/state/Games.ts",
+    "src/global/state/CurrentGame.ts",
 
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",
     "src/global/components/CustomRadio/CustomRadio.ts",
-    "src/global/components/PlayerSelection/PlayerSelection.ts",
 
     /* Pages */
     "src/routes/mainmenu/mainmenu.ts",

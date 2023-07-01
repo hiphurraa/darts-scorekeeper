@@ -19,7 +19,7 @@ Vue.component('NavigationHeader', {
     </div>`,
     data () {
         return {
-            theme: pageSettings.theme
+            theme: applicationSettings.theme
         }
     },
     methods: {

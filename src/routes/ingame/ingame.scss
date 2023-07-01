@@ -1,3 +1,163 @@
-.page-ingame {
+:root {
+  --ingame-input-bg: #5a5a5a;
+  --ingame-input-color: white;
+  --ingame-miss-btn-bg: gray;
+  --ingame-factor-btn-bg: #9d0000;
+  --ingame-factor-btn-active-bg: #e50000;
+  --ingame-cancel-btn-bg: black;
+  --ingame-bull-bg: #5a5a5a;
+  --ingame-double-bull-bg: #5a5a5a;
+  --ingame-input-active-bg: gray;
+  --ingame-miss-active-bg: #adadad;
+  --ingame-cancel-active-bg: #3d3d3d;
+  --ingame-bull-active-bg: gray;
+  --ingame-double-bull-active-bg: gray;
+}
 
+.page-ingame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .score-status {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .scoreboard {
+      width: 100%;
+
+      .player {
+
+        font-size: 5vmin;
+
+        &.current {
+          background-color: #7800ff;
+          font-size: 7vmin;
+        }
+
+      }
+
+      .player-info {
+        display: flex;
+        align-items: center;
+        padding: 2vmin;
+
+        & > * {
+          width: 50%;
+          text-align: center;
+        }
+      }
+
+      .turn-info {
+        display: flex;
+        justify-content: center;
+        padding: 2vmin 0 5vmin 0;
+
+        .throw {
+          background-color: #e4d2ff;
+          border-radius: 100%;
+          height: 10vmin;
+          width: 10vmin;
+          color: black;
+          font-size: 5vmin;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+
+          &.empty:not(.active) {
+            background-color: #8544ff;
+          }
+
+          &:not(:first-child) {
+            margin-left: 14vmin;
+          }
+        }
+      }
+    }
+  }
+
+  .score-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2vmin;
+    padding: 2vmin;
+
+    .input-row {
+      display: flex;
+      width: 100%;
+      gap: 2vmin;
+
+      .input {
+        flex-grow: 1;
+        background-color: var(--ingame-input-bg);
+        color: var(--ingame-input-color);
+        text-align: center;
+        padding: 3vmin 0;
+        border-radius: 2vmin;
+        font-size: 5vmin;
+
+        &:active {
+          background-color: var(--ingame-input-active-bg);
+        }
+
+        &.one3th {
+          width: calc(100% / 3);
+        }
+
+        &.one5th {
+          width: calc(100% / 5);
+        }
+
+        &.bull {
+          background-color: var(--ingame-bull-bg);
+
+          &:active {
+            background-color: var(--ingame-bull-active-bg);
+          }
+        }
+
+        &.double-bull {
+          background-color: var(--ingame-double-bull-bg);
+
+          &:active {
+            background-color: var(--ingame-double-bull-active-bg);
+          }
+        }
+
+        &.miss {
+          background-color: var(--ingame-miss-btn-bg);
+
+          &:active {
+            background-color: var(--ingame-miss-active-bg);
+          }
+        }
+
+        &.factor {
+          background-color: var(--ingame-factor-btn-bg);
+
+          &.active {
+            background-color: var(--ingame-factor-btn-active-bg);
+          }
+        }
+
+        &.cancel {
+          background-color: var(--ingame-cancel-btn-bg);
+
+          &:active {
+            background-color: var(--ingame-cancel-active-bg);
+          }
+        }
+      }
+    }
+  }
 }
