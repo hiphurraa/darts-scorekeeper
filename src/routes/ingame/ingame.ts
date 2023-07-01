@@ -12,7 +12,7 @@ const route_ingame = Vue.component('route_ingame', {
                         <div class="throw" :class="{empty: !turn.throw1, active: !turn.throw1}">
                             <div v-if="turn.throw1">
                                 <span class="score">{{ turn.throw1.score }}</span>
-                                <span class="factor">{{ turn.throw1.score }}</span>                            
+                                <span class="factor">{{ turn.throw1.score }}</span>
                             </div>
                         </div>
                         <div class="throw" :class="{empty: !turn.throw2, active: !!turn.throw1 && !turn.throw2}">
@@ -24,7 +24,7 @@ const route_ingame = Vue.component('route_ingame', {
                         <div class="throw" :class="{empty: !turn.throw3, active: !!turn.throw1 && !!turn.throw2 && !turn.throw3}">
                             <div v-if="turn.throw3">
                                 <span class="score">{{ turn.throw3.score }}</span>
-                                <span class="factor">{{ turn.throw3.factor }}</span>                            
+                                <span class="factor">{{ turn.throw3.factor }}</span>
                             </div>
                         </div>
                     </div>
