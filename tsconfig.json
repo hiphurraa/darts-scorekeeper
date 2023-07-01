@@ -11,6 +11,7 @@
     /* Global state */
     "src/global/state/GameSettings.ts",
     "src/global/state/ApplicationSettings.ts",
+    "src/global/state/Games.ts",
 
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",

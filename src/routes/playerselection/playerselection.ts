@@ -32,7 +32,7 @@ const route_playerselection = Vue.component('route_playerselection', {
     methods: {
         startGame() {
             if (this.isGameSettingsValid) {
-                this.$router.push('/addplayer');
+                this.$router.push('/ingame');
             }
         },
 
