@@ -11,20 +11,20 @@ const route_ingame = Vue.component('route_ingame', {
                     <div v-if="turn.player.id === player.id" class="turn-info">
                         <div class="throw" :class="{empty: !turn.throw1, active: !turn.throw1}">
                             <div v-if="turn.throw1">
+                                <span class="factor">{{ getFactor(turn.throw1) }}</span>
                                 <span class="score">{{ turn.throw1.score }}</span>
-                                <span class="factor">{{ turn.throw1.score }}</span>
                             </div>
                         </div>
                         <div class="throw" :class="{empty: !turn.throw2, active: !!turn.throw1 && !turn.throw2}">
                             <div v-if="turn.throw2">
+                                <span class="factor">{{ getFactor(turn.throw2) }}</span>
                                 <span class="score">{{ turn.throw2.score }}</span>
-                                <span class="factor">{{ turn.throw2.factor }}</span>                            
                             </div>
                         </div>
                         <div class="throw" :class="{empty: !turn.throw3, active: !!turn.throw1 && !!turn.throw2 && !turn.throw3}">
                             <div v-if="turn.throw3">
+                                <span class="factor">{{ getFactor(turn.throw3) }}</span>
                                 <span class="score">{{ turn.throw3.score }}</span>
-                                <span class="factor">{{ turn.throw3.factor }}</span>
                             </div>
                         </div>
                     </div>
@@ -88,8 +88,16 @@ const route_ingame = Vue.component('route_ingame', {
         this.currentPlayer = this.game.players[0];
     },
     methods: {
+        getFactor(anyThrow: Throw) {
+            switch(anyThrow.factor) {
+                case 1: return "";
+                case 2: return "D";
+                case 3: return "T";
+
+            }
+        },
         onCancel() {
-            this.game.turns.pop();
+            currentGame.turns.pop();
         },
         onInput(score) {
             if (score === 50 || score === 25) {
@@ -108,17 +116,16 @@ const route_ingame = Vue.component('route_ingame', {
             this.double = false;
             this.triple = false;
 
-            if (this.turn.throw1.score === null) {
-                this.turn.throw1.score = score;
-                this.turn.throw1.factor = factor;
-            } else if (this.turn.throw2.score === null) {
-                this.turn.throw2.score = score;
-                this.turn.throw2.factor = factor;
+            if (this.turn.throw1 === null) {
+                this.turn.throw1 = {score, factor};
+            } else if (this.turn.throw2 === null) {
+                this.turn.throw2 = {score, factor};
             } else {
-                this.turn.throw3.score = score;
-                this.turn.throw3.factor = factor;
+                this.turn.throw3 = {score, factor};
                 newTurn();
             }
+
+            console.log(this.turn);
         },
         on2x() {
             this.triple = false;
@@ -132,12 +139,12 @@ const route_ingame = Vue.component('route_ingame', {
 
         },
         getScore(player: Player) {
-            let score = 0;
+            let score = gameSettings.startingPoints;
             currentGame.turns.forEach((turn: Turn) => {
                 if (turn.player.id === player.id) {
-                    score += turn.throw1 ? turn.throw1.score * turn.throw1.factor : 0;
-                    score += turn.throw2 ? turn.throw2.score * turn.throw2.factor : 0;
-                    score += turn.throw3 ? turn.throw3.score * turn.throw3.factor : 0;
+                    score -= turn.throw1 ? turn.throw1.score * turn.throw1.factor : 0;
+                    score -= turn.throw2 ? turn.throw2.score * turn.throw2.factor : 0;
+                    score -= turn.throw3 ? turn.throw3.score * turn.throw3.factor : 0;
                 }
             });
             return score;
