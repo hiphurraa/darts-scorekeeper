@@ -15,6 +15,7 @@ const route_newgame = Vue.component('route_newgame', {
     </div>`,
     methods: {
         toPlayerSelectionPage() {
+            vibrate();
             this.$router.push('/playerselection');
         },
     },

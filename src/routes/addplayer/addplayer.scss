@@ -1,0 +1,12 @@
+.page-addplayer {
+  .add-player {
+    margin-top: 5vmin;
+  }
+
+  .validation-error {
+    font-size: 5vmin;
+    margin-top: 3vmin;
+    text-align: center;
+    color: var(--error-text-color);
+  }
+}

@@ -19,6 +19,7 @@
   --default-btn-color: #ffffff;
   --secondary-btn-bg: #cfcfcf;
   --secondary-btn-color: #000000;
+  --attention-text-color: #00f5be;
 }
 
 :root[data-theme='dark'] {
@@ -40,6 +41,7 @@
   --default-btn-color: #ffffff;
   --secondary-btn-bg: #515151;
   --secondary-btn-color: #ffffff;
+  --error-text-color: #00f5be;
 }
 
 html {
@@ -116,4 +118,29 @@ body {
 .page-content {
   padding: 2vmin;
   width: 100%;
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--container-bg);
+  padding: 3vmin 0;
+  margin-top: 3vmin;
+  border-radius: 2vmin;
+
+  .header {
+    font-size: 5vmin;
+    margin-bottom: 3vmin;
+  }
+}
+
+.text-input {
+  width: calc(100% - 6vmin);
+  border-radius: 2vmin;
+  border: none;
+  font-size: 5vmin;
+  padding: 1vmin;
+  text-align: center;
 }

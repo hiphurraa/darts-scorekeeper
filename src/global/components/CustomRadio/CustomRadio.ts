@@ -9,7 +9,7 @@ Vue.component('CustomRadio', {
         title: String,
         options: Array as () => RadioOption[]
     },
-    template: `<div class="component-custom-radio">
+    template: `<div class="component-custom-radio input-container">
         <div class="title">{{ title }}</div>
         <div class="options">
             <div v-for="item in options" class="option" :class="{selected: item.selected}" @click="onSelected(item)">
@@ -19,6 +19,8 @@ Vue.component('CustomRadio', {
     </div>`,
     methods: {
         onSelected (option) {
+            vibrate();
+
             this.options.forEach((item) => {
                 item.selected = false;
             });

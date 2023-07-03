@@ -4,7 +4,7 @@ const route_playerselection = Vue.component('route_playerselection', {
         <NavigationHeader title="Uusi peli (2/2)"></NavigationHeader>
 
         <div class="page-content">
-            <div class="player-list">
+            <div class="player-list input-container">
                 <div class="header">Valitse pelaajat (valittuna: {{nSelectedPlayers}})</div>
                 <div v-for="player in gameSettings.players" class="player" :class="{selected: player.selected}" 
                 @click="toggleSelection(player)">
@@ -32,6 +32,7 @@ const route_playerselection = Vue.component('route_playerselection', {
     methods: {
         startGame() {
             if (this.isGameSettingsValid) {
+                vibrate();
                 let selectedPlayers = gameSettings.players.filter((player: Player) => {
                     return player.selected;
                 })
@@ -41,10 +42,12 @@ const route_playerselection = Vue.component('route_playerselection', {
         },
 
         toAddPlayerPage() {
+            vibrate();
             this.$router.push('/addplayer');
         },
 
         toggleSelection (player: Player) {
+            vibrate();
             player.selected = !player.selected;
             saveGameSettings();
             this.checkGameSettings();

@@ -72,12 +72,19 @@
         .player-info {
           display: flex;
           align-items: center;
-          padding: 2vmin;
+          padding: 2vmin 2vmin 2vmin 6vmin;
           position: relative;
 
           & > div {
-            width: 50%;
             text-align: center;
+
+            &.name {
+              width: 50%;
+            }
+
+            &.total-score {
+              width: 50%;
+            }
           }
 
           .player-order-number {

@@ -11,9 +11,11 @@ let route_mainmenu = Vue.component('route_mainmenu', {
     </div>`,
     methods: {
         toNewGame() {
+            vibrate();
             router.push("/newgame");
         },
         toSettings() {
+            vibrate();
             router.push("/settings");
         }
     }

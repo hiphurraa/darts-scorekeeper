@@ -34,6 +34,23 @@ function loadGameSettings (): GameSettings {
 
 let gameSettings: GameSettings = loadGameSettings();
 
+function addPlayer (name: string, selected: boolean): boolean {
+    if(gameSettings.players.find((p) => p.name.toLowerCase().trim() === name.toLowerCase())) {
+        return false;
+    }
+    else if (name.trim().length > 16) {
+        return false;
+    }
+    let player: Player = {
+        id: (gameSettings.players.reduce((a, b) => Math.max(a, b.id), 0) + 1),
+        name: name.trim(),
+        selected
+    };
+    gameSettings.players.push(player);
+    saveGameSettings();
+    return true;
+}
+
 function saveGameSettings () {
     localStorage.setItem(GAME_SETTINGS, JSON.stringify(gameSettings));
 }

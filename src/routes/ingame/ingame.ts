@@ -6,8 +6,8 @@ const route_ingame = Vue.component('route_ingame', {
                 <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
                     <div class="player-info">
                         <span class="player-order-number">{{ i+1 }}.</span>
-                        <div>{{ player.name }}</div>
-                        <div>{{ getScore(player) }}</div>
+                        <div class="name">{{ player.name }}</div>
+                        <div class="total-score">{{ getScore(player) }}</div>
                     </div>
                     <div v-if="turn.player.id === player.id" class="turn-info">
                         <div class="dart" :class="{empty: !turn.darts[0], active: !turn.darts[0]}">
@@ -99,6 +99,8 @@ const route_ingame = Vue.component('route_ingame', {
                 return;
             }
 
+            vibrate();
+
             // apply factor
             let factor = 1;
             if (score === 50 || score === 25 || score === 0) {
@@ -121,6 +123,8 @@ const route_ingame = Vue.component('route_ingame', {
             if (this.turn.darts.length === 3) {
                 return;
             }
+
+            vibrate();
             this.triple = false;
             this.double = !this.double;
         },
@@ -128,10 +132,18 @@ const route_ingame = Vue.component('route_ingame', {
             if (this.turn.darts.length === 3) {
                 return;
             }
+
+            vibrate();
             this.double = false;
             this.triple = !this.triple;
         },
         onCancel() {
+            if(!(currentGame.turns.length > 1) && !(this.turn.darts.length)) {
+                return;
+            }
+
+            vibrate();
+
             this.double = false;
             this.triple = false;
 
@@ -147,6 +159,7 @@ const route_ingame = Vue.component('route_ingame', {
             if (this.turn.darts.length !== 3) {
                 return;
             }
+            vibrate();
             newTurn();
             this.turn = currentGame.turns[currentGame.turns.length - 1]
         },

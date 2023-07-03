@@ -24,6 +24,7 @@ Vue.component('NavigationHeader', {
     },
     methods: {
         onPrevious() {
+            vibrate();
             if (!!this.previousExecute) {
                 this.previousExecute();
             } else {

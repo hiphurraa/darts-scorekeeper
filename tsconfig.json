@@ -8,6 +8,9 @@
     "lib/vue.js",
     "lib/vue-router.min.js",
 
+    /* Navigator */
+    "src/navigator.ts",
+
     /* Global state */
     "src/global/state/GameSettings.ts",
     "src/global/state/ApplicationSettings.ts",
