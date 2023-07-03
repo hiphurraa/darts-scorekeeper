@@ -36,45 +36,45 @@ const route_ingame = Vue.component('route_ingame', {
         
         <div class="score-input">
             <div class="input-row">
-                <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}" 
+                <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
                     @click="onCancel">PERU
                 </div>
-                <div class="input one4th factor" :class="{active: double}" @click="on2x">2x</div>
-                <div class="input one4th factor" :class="{active: triple}" @click="on3x">3x</div>
+                <div class="input one4th factor" :class="{active: double, disabled: disableDigits}" @click="on2x">2x</div>
+                <div class="input one4th factor" :class="{active: triple, disabled: disableDigits}" @click="on3x">3x</div>
                 <div class="input one4th confirm" :class="{disabled: turn.darts.length !== 3}" @click="nextTurn">OK</div>
             </div>
             <div class="input-row">
-                <div class="input one5th" @click="onInput(1)">1</div>
-                <div class="input one5th" @click="onInput(2)">2</div>
-                <div class="input one5th" @click="onInput(3)">3</div>
-                <div class="input one5th" @click="onInput(4)">4</div>
-                <div class="input one5th" @click="onInput(5)">5</div>
+                <div class="input digit one5th" @click="onInput(1)" :class="{disabled: disableDigits}">1</div>
+                <div class="input digit one5th" @click="onInput(2)" :class="{disabled: disableDigits}">2</div>
+                <div class="input digit one5th" @click="onInput(3)" :class="{disabled: disableDigits}">3</div>
+                <div class="input digit one5th" @click="onInput(4)" :class="{disabled: disableDigits}">4</div>
+                <div class="input digit one5th" @click="onInput(5)" :class="{disabled: disableDigits}">5</div>
             </div>
             <div class="input-row">
-                <div class="input one5th" @click="onInput(6)">6</div>
-                <div class="input one5th" @click="onInput(7)">7</div>
-                <div class="input one5th" @click="onInput(8)">8</div>
-                <div class="input one5th" @click="onInput(9)">9</div>
-                <div class="input one5th" @click="onInput(10)">10</div>
+                <div class="input digit one5th" @click="onInput(6)" :class="{disabled: disableDigits}">6</div>
+                <div class="input digit one5th" @click="onInput(7)" :class="{disabled: disableDigits}">7</div>
+                <div class="input digit one5th" @click="onInput(8)" :class="{disabled: disableDigits}">8</div>
+                <div class="input digit one5th" @click="onInput(9)" :class="{disabled: disableDigits}">9</div>
+                <div class="input digit one5th" @click="onInput(10)" :class="{disabled: disableDigits}">10</div>
             </div>
             <div class="input-row">
-                <div class="input one5th" @click="onInput(11)">11</div>
-                <div class="input one5th" @click="onInput(12)">12</div>
-                <div class="input one5th" @click="onInput(13)">13</div>
-                <div class="input one5th" @click="onInput(14)">14</div>
-                <div class="input one5th" @click="onInput(15)">15</div>
+                <div class="input digit one5th" @click="onInput(11)" :class="{disabled: disableDigits}">11</div>
+                <div class="input digit one5th" @click="onInput(12)" :class="{disabled: disableDigits}">12</div>
+                <div class="input digit one5th" @click="onInput(13)" :class="{disabled: disableDigits}">13</div>
+                <div class="input digit one5th" @click="onInput(14)" :class="{disabled: disableDigits}">14</div>
+                <div class="input digit one5th" @click="onInput(15)" :class="{disabled: disableDigits}">15</div>
             </div>
             <div class="input-row">
-                <div class="input one5th" @click="onInput(16)">16</div>
-                <div class="input one5th" @click="onInput(17)">17</div>
-                <div class="input one5th" @click="onInput(18)">18</div>
-                <div class="input one5th" @click="onInput(19)">19</div>
-                <div class="input one5th" @click="onInput(20)">20</div>
+                <div class="input digit one5th" @click="onInput(16)" :class="{disabled: disableDigits}">16</div>
+                <div class="input digit one5th" @click="onInput(17)" :class="{disabled: disableDigits}">17</div>
+                <div class="input digit one5th" @click="onInput(18)" :class="{disabled: disableDigits}">18</div>
+                <div class="input digit one5th" @click="onInput(19)" :class="{disabled: disableDigits}">19</div>
+                <div class="input digit one5th" @click="onInput(20)" :class="{disabled: disableDigits}">20</div>
             </div>
             <div class="input-row">
-                <div class="input one3th miss" @click="onInput(0)">OHI</div>
-                <div class="input one3th bull" @click="onInput(25)">25</div>
-                <div class="input one3th double-bull" @click="onInput(50)">50</div>
+                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: disableDigits}">OHI</div>
+                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: disableDigits}">25</div>
+                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: disableDigits}">50</div>
             </div>
         </div>
 
@@ -87,6 +87,11 @@ const route_ingame = Vue.component('route_ingame', {
             triple: false,
             scoreStatuses: [],
         };
+    },
+    computed: {
+        disableDigits() {
+            return this.turn.darts.length === 3;
+        }
     },
     methods: {
         onInput(score) {

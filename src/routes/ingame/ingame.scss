@@ -5,6 +5,7 @@
   --ingame-factor-btn-bg: #9d0000;
   --ingame-factor-btn-active-bg: #e50000;
   --ingame-cancel-btn-bg: black;
+  --ingame-cancel-btn-color: #efefef;
   --ingame-bull-bg: #5a5a5a;
   --ingame-double-bull-bg: #5a5a5a;
   --ingame-input-active-bg: gray;
@@ -23,6 +24,7 @@
   --ingame-factor-btn-bg: #9d0000;
   --ingame-factor-btn-active-bg: #e50000;
   --ingame-cancel-btn-bg: black;
+  --ingame-cancel-btn-color: #efefef;
   --ingame-bull-bg: #5a5a5a;
   --ingame-double-bull-bg: #5a5a5a;
   --ingame-input-active-bg: gray;
@@ -174,6 +176,7 @@
         &.cancel {
           font-size: 4vmin;
           background-color: var(--ingame-cancel-btn-bg);
+          color: var(--ingame-cancel-btn-color);
 
           &:active:not(.disabled) {
             background-color: var(--ingame-cancel-active-bg);
@@ -185,6 +188,10 @@
 
           &.active:not(.disabled) {
             background-color: var(--ingame-factor-btn-active-bg);
+          }
+
+          &:active {
+            background-color: var(--ingame-factor-btn-bg);
           }
         }
 
