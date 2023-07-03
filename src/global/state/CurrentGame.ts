@@ -1,13 +1,12 @@
 const CURRENT_GAME: string = "darts-scorekeeper-current-game";
 
-declare interface Throw {
+declare interface Dart {
     score: number,
     factor: number,
 }
+
 declare interface Turn {
-    throw1: Throw | null
-    throw2: Throw | null,
-    throw3: Throw | null,
+    darts: Dart[]
     player: Player,
 }
 
@@ -17,12 +16,12 @@ declare interface Game {
     finished: boolean,
 }
 
-function loadCurrentGame (): Game {
+function loadCurrentGame(): Game {
     let storageItem = localStorage.getItem(CURRENT_GAME);
     if (storageItem) {
         try {
             return JSON.parse(storageItem);
-        } catch(error) {
+        } catch (error) {
             return null;
         }
     }
@@ -31,12 +30,12 @@ function loadCurrentGame (): Game {
 
 let currentGame: Game = loadCurrentGame();
 
-function saveGame () {
+function saveGame() {
     localStorage.setItem(CURRENT_GAME, JSON.stringify(currentGame));
 }
 
 function createNewGame(players: Player[]) {
-    currentGame = {players, turns: [{player: players[0], throw1: null, throw2: null, throw3: null}], finished: false};
+    currentGame = {players, turns: [{player: players[0], darts: []}], finished: false};
     saveGame();
 }
 
@@ -44,26 +43,21 @@ function newTurn() {
     let nextPlayerIdx = 0;
 
     let currentPlayerIdx = currentGame.players.findIndex((player: Player) => {
-        return player.id === currentGame.turns[currentGame.turns.length-1].player.id;
+        return player.id === currentGame.turns[currentGame.turns.length - 1].player.id;
     });
 
-    if (currentPlayerIdx !== currentGame.players.length-1) {
+    if (currentPlayerIdx !== currentGame.players.length - 1) {
         nextPlayerIdx = currentPlayerIdx + 1;
     }
 
     let nextPlayer: Player = currentGame.players[nextPlayerIdx];
 
     currentGame.turns.push({
-        throw1: null,
-        throw2: null,
-        throw3: null,
+        darts: [],
         player: nextPlayer,
     });
+
     saveGame();
-}
-
-function previousTurn() {
-
 }
 
 function resetDefaultCurrentGame() {

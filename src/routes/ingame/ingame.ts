@@ -3,28 +3,30 @@ const route_ingame = Vue.component('route_ingame', {
 
         <div class="score-status">
             <div class="scoreboard">
-                <div v-for="player in game.players" class="player" :class="{current: turn.player.id === player.id}">
+                <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
                     <div class="player-info">
+                        <span class="player-order-number">{{ i+1 }}.</span>
                         <div>{{ player.name }}</div>
-                        <div>{{ getScore(player) }}</div>                    
+                        <div>{{ getScore(player) }}</div>
                     </div>
                     <div v-if="turn.player.id === player.id" class="turn-info">
-                        <div class="throw" :class="{empty: !turn.throw1, active: !turn.throw1}">
-                            <div v-if="turn.throw1">
-                                <span class="factor">{{ getFactor(turn.throw1) }}</span>
-                                <span class="score">{{ turn.throw1.score }}</span>
+                        <div class="dart" :class="{empty: !turn.darts[0], active: !turn.darts[0]}">
+                            <div v-if="turn.darts[0]">
+                                <span class="factor">{{ getFactor(0) }}</span>
+                                <span class="score">{{ turn.darts[0].score }}</span>
                             </div>
                         </div>
-                        <div class="throw" :class="{empty: !turn.throw2, active: !!turn.throw1 && !turn.throw2}">
-                            <div v-if="turn.throw2">
-                                <span class="factor">{{ getFactor(turn.throw2) }}</span>
-                                <span class="score">{{ turn.throw2.score }}</span>
+                        <div class="dart" :class="{empty: !turn.darts[1], active: !!turn.darts[0] && !turn.darts[1]}">
+                            <div v-if="turn.darts[1]">
+                                <span class="factor">{{ getFactor(1) }}</span>
+                                <span class="score">{{ turn.darts[1].score }}</span>
                             </div>
                         </div>
-                        <div class="throw" :class="{empty: !turn.throw3, active: !!turn.throw1 && !!turn.throw2 && !turn.throw3}">
-                            <div v-if="turn.throw3">
-                                <span class="factor">{{ getFactor(turn.throw3) }}</span>
-                                <span class="score">{{ turn.throw3.score }}</span>
+                        <div class="dart" 
+                        :class="{empty: !turn.darts[2], active: !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
+                            <div v-if="turn.darts[2]">
+                                <span class="factor">{{ getFactor(2) }}</span>
+                                <span class="score">{{ turn.darts[2].score }}</span>
                             </div>
                         </div>
                     </div>
@@ -34,9 +36,12 @@ const route_ingame = Vue.component('route_ingame', {
         
         <div class="score-input">
             <div class="input-row">
-                <div class="input one3th miss" @click="onInput(0)">ohi</div>
-                <div class="input one3th factor" :class="{active: double}" @click="on2x">2x</div>
-                <div class="input one3th factor" :class="{active: triple}" @click="on3x">3x</div>
+                <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}" 
+                    @click="onCancel">PERU
+                </div>
+                <div class="input one4th factor" :class="{active: double}" @click="on2x">2x</div>
+                <div class="input one4th factor" :class="{active: triple}" @click="on3x">3x</div>
+                <div class="input one4th confirm" :class="{disabled: turn.darts.length !== 3}" @click="nextTurn">OK</div>
             </div>
             <div class="input-row">
                 <div class="input one5th" @click="onInput(1)">1</div>
@@ -67,7 +72,7 @@ const route_ingame = Vue.component('route_ingame', {
                 <div class="input one5th" @click="onInput(20)">20</div>
             </div>
             <div class="input-row">
-                <div class="input one3th cancel" @click="onCancel">peru</div>
+                <div class="input one3th miss" @click="onInput(0)">OHI</div>
                 <div class="input one3th bull" @click="onInput(25)">25</div>
                 <div class="input one3th double-bull" @click="onInput(50)">50</div>
             </div>
@@ -80,71 +85,86 @@ const route_ingame = Vue.component('route_ingame', {
             turn: currentGame.turns[currentGame.turns.length - 1] as Turn,
             double: false,
             triple: false,
-            currentPlayer: null,
             scoreStatuses: [],
         };
     },
-    mounted() {
-        this.currentPlayer = this.game.players[0];
-    },
     methods: {
-        getFactor(anyThrow: Throw) {
-            switch(anyThrow.factor) {
-                case 1: return "";
-                case 2: return "D";
-                case 3: return "T";
-
-            }
-        },
-        onCancel() {
-            currentGame.turns.pop();
-        },
         onInput(score) {
-            if (score === 50 || score === 25) {
-                this.double = false;
-                this.triple = false;
+            if(this.turn.darts.length === 3) {
+                return;
             }
 
+            // apply factor
             let factor = 1;
-
-            if (this.double) {
+            if (score === 50 || score === 25 || score === 0) {
+                // do nothing, no factor for bulls or zero
+            } else if (this.double) {
                 factor = 2;
             } else if (this.triple) {
                 factor = 3;
             }
 
+            // reset factors
             this.double = false;
             this.triple = false;
 
-            if (this.turn.throw1 === null) {
-                this.turn.throw1 = {score, factor};
-            } else if (this.turn.throw2 === null) {
-                this.turn.throw2 = {score, factor};
-            } else {
-                this.turn.throw3 = {score, factor};
-                newTurn();
-            }
-
-            console.log(this.turn);
+            // add dart
+            this.turn.darts.push({score, factor});
+            saveGame();
         },
         on2x() {
+            if (this.turn.darts.length === 3) {
+                return;
+            }
             this.triple = false;
             this.double = !this.double;
         },
         on3x() {
+            if (this.turn.darts.length === 3) {
+                return;
+            }
             this.double = false;
             this.triple = !this.triple;
         },
-        onMiss() {
+        onCancel() {
+            this.double = false;
+            this.triple = false;
 
+            if (this.turn.darts.length) {
+                this.turn.darts.pop();
+            } else if (currentGame.turns.length > 1){
+                currentGame.turns.pop();
+            }
+            this.turn = currentGame.turns[currentGame.turns.length - 1]
+            saveGame();
+        },
+        nextTurn () {
+            if (this.turn.darts.length !== 3) {
+                return;
+            }
+            newTurn();
+            this.turn = currentGame.turns[currentGame.turns.length - 1]
+        },
+        getFactor(dartIndex: number) {
+            let dart: Dart = this.turn.darts[dartIndex];
+
+            if (!dart && this.double) {
+                return "D..";
+            } else if (!dart && this.triple) {
+                return "T..";
+            } else if (!dart || dart.factor === 1) {
+                return "";
+            } else if (dart.factor === 2) {
+                return "D";
+            } else if (dart.factor === 3) {
+                return "T";
+            }
         },
         getScore(player: Player) {
             let score = gameSettings.startingPoints;
             currentGame.turns.forEach((turn: Turn) => {
                 if (turn.player.id === player.id) {
-                    score -= turn.throw1 ? turn.throw1.score * turn.throw1.factor : 0;
-                    score -= turn.throw2 ? turn.throw2.score * turn.throw2.factor : 0;
-                    score -= turn.throw3 ? turn.throw3.score * turn.throw3.factor : 0;
+                    score -= turn.darts.reduce((acc, dart) => acc + (dart.score * dart.factor), 0);
                 }
             });
             return score;
