@@ -1,10 +1,11 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config()
 
 const app = express();
-const ip = '192.168.0.149';
-const port = 5173;
+const ip = process.env.IP_ADDRESS;
+const port = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
