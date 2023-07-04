@@ -17,11 +17,7 @@ declare interface GameSettings {
 const defaultGameSettings: GameSettings = {
     startingPoints: 501,
     startsWithDouble: false,
-    players: [{id: 0, name: 'Tomi', selected: false}, {id: 1, name: 'Teppo', selected: false}, {
-        id: 2,
-        name: 'Pete',
-        selected: false
-    }]
+    players: []
 }
 
 function loadGameSettings(): GameSettings {

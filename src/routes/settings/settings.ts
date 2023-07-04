@@ -1,10 +1,10 @@
 const route_settings = Vue.component('route_settings', {
-    template: `<div>
+    template: `<div class="page-settings">
         <NavigationHeader title="Asetukset"></NavigationHeader>
         <div class="page-content">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
-            <div style="margin-top: 10vmin;" class="button-s" @click="clearAll">Nollaa</div>
+            <div class="button-s clear-all" @click="clearAll">Nollaa kaikki</div>
         </div>
     </div>`,
     data() {
@@ -60,10 +60,10 @@ const route_settings = Vue.component('route_settings', {
             resetDefaultApplicationSettings();
             resetDefaultCurrentGame();
             resetDefaultGameSettings();
-            vibrate(500);
+            vibrate([300, 100, 300]);
             setTimeout(() => {
                 location.reload();
-            }, 500)
+            }, 700)
 
         }
     }

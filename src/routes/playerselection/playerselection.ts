@@ -6,8 +6,8 @@ const route_playerselection = Vue.component('route_playerselection', {
         <div class="page-content">
             <div class="player-list input-container">
                 <div class="header">Valitse pelaajat (valittuna: {{nSelectedPlayers}})</div>
-                <div v-for="player in gameSettings.players" class="player" :class="{selected: player.selected}" 
-                @click="toggleSelection(player)">
+                <div v-for="player in gameSettings.players" class="player" 
+                        :class="{selected: player.selected}" @click="toggleSelection(player)">
                     <div class="selection" :class="{selected: player.selected}"></div>
                     <div class="name">{{ player.name }}</div>
                     <div class="spacer"></div>

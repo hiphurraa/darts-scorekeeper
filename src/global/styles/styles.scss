@@ -71,7 +71,6 @@ body {
   text-decoration: none;
   padding: 3vmin 5vmin;
   border-radius: 2vmin;
-  margin-bottom: 3vmin;
   text-align: center;
 
   * {
@@ -100,7 +99,8 @@ body {
 }
 
 .button-s {
-  font-size: 5vmin;
+  font-size: 4vmin;
+  padding: 2vmin 3vmin;
 }
 
 .button-m {
@@ -143,4 +143,35 @@ body {
   font-size: 5vmin;
   padding: 1vmin;
   text-align: center;
+}
+
+.mb1 {
+  margin-bottom: 1vmin;
+}
+.mb2 {
+  margin-bottom: 2vmin;
+}
+.mb3 {
+  margin-bottom: 3vmin;
+}
+.mb4 {
+  margin-bottom: 4vmin;
+}
+.mb5 {
+  margin-bottom: 5vmin;
+}
+.mt1 {
+  margin-top: 1vmin;
+}
+.mt2 {
+  margin-top: 2vmin;
+}
+.mt3 {
+  margin-top: 3vmin;
+}
+.mt4 {
+  margin-top: 4vmin;
+}
+.mt5 {
+  margin-top: 5vmin;
 }

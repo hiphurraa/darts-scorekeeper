@@ -72,7 +72,7 @@ const route_ingame = Vue.component('route_ingame', {
                 <div class="input digit one5th" @click="onInput(20)" :class="{disabled: disableDigits}">20</div>
             </div>
             <div class="input-row">
-                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: disableDigits}">OHI</div>
+                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: disableDigits}">0</div>
                 <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: disableDigits}">25</div>
                 <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: disableDigits}">50</div>
             </div>
