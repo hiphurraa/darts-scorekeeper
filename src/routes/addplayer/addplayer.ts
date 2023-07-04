@@ -14,7 +14,7 @@ const route_addplayer = Vue.component('route_addplayer', {
                 @selected="(o) => {autoSelectPlayerOptions = o}">
             </CustomRadio>
         
-            <div class="button-m default add-player" :class="{disabled: !!validationError}" @click="savePlayer">Tallenna pelaaja</div>
+            <div class="button-m default add-player" @click="savePlayer">Tallenna pelaaja</div>
         </div>
         
     </div>`,

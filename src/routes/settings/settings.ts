@@ -4,7 +4,7 @@ const route_settings = Vue.component('route_settings', {
         <div class="page-content">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
-            <div class="button-s clear-all" @click="clearAll">Nollaa kaikki</div>
+            <div class="button-s clear-all" @click="clearAll">Resetoi sovellus</div>
         </div>
     </div>`,
     data() {
