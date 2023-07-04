@@ -117,6 +117,11 @@ const route_ingame = Vue.component('route_ingame', {
 
             // add dart
             this.turn.darts.push({score, factor});
+
+            // check if score went under zero and act accordingly
+            if (this.getScore(this.turn.player) < 0) {
+                this.turn.darts = [{score: 0, factor: 1}, {score: 0, factor: 1}, {score: 0, factor: 1}];
+            }
             saveGame();
         },
         on2x() {
