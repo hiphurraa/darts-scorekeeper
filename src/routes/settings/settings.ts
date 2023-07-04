@@ -7,7 +7,7 @@ const route_settings = Vue.component('route_settings', {
             <div style="margin-top: 10vmin;" class="button-s" @click="clearAll">Nollaa</div>
         </div>
     </div>`,
-    data () {
+    data() {
         return {
             themeOptions: [
                 {selected: false, label: "Tumma", value: 'dark'},
@@ -19,7 +19,7 @@ const route_settings = Vue.component('route_settings', {
             ] as RadioOption[]
         }
     },
-    mounted () {
+    mounted() {
         this.themeOptions = this.themeOptions.map((option) => {
             option.selected = applicationSettings.theme === option.value;
             return option;
@@ -32,35 +32,39 @@ const route_settings = Vue.component('route_settings', {
     computed: {
         theme(): boolean {
             let selected = this.themeOptions.find((o) => o.selected);
-            return selected? selected.value : null;
+            return selected ? selected.value : null;
         },
         language(): boolean {
             let selected = this.languageOptions.find((o) => o.selected);
-            return selected? selected.value : null;
+            return selected ? selected.value : null;
         },
     },
     watch: {
-      theme(theme, old) {
-          if (theme === null || old === null) {
-              return;
-          }
-          applicationSettings.theme = theme;
-          saveApplicationSettings();
-      },
-      language(language, old) {
-          if (language === null || old === null) {
-              return;
-          }
-          applicationSettings.language = language;
-          saveApplicationSettings();
-      }
+        theme(theme, old) {
+            if (theme === null || old === null) {
+                return;
+            }
+            applicationSettings.theme = theme;
+            saveApplicationSettings();
+        },
+        language(language, old) {
+            if (language === null || old === null) {
+                return;
+            }
+            applicationSettings.language = language;
+            saveApplicationSettings();
+        }
     },
     methods: {
         clearAll() {
             resetDefaultApplicationSettings();
             resetDefaultCurrentGame();
             resetDefaultGameSettings();
-            location.reload();
+            vibrate(500);
+            setTimeout(() => {
+                location.reload();
+            }, 500)
+
         }
     }
 })

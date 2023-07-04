@@ -1,5 +1,5 @@
-function vibrate(ms?: number) {
+function vibrate(pattern?: number | number[]) {
     if ("vibrate" in navigator) {
-        navigator.vibrate(60);
+        navigator.vibrate(pattern ? pattern : 50);
     }
 }

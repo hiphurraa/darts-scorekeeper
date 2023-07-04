@@ -1,4 +1,6 @@
 const GAME_SETTINGS: string = "darts-scorekeeper-game-settings";
+const NAME_MIN_LENGTH = 1;
+const NAME_MAX_LENGTH = 16;
 
 declare interface Player {
     id: number,
@@ -15,15 +17,19 @@ declare interface GameSettings {
 const defaultGameSettings: GameSettings = {
     startingPoints: 501,
     startsWithDouble: false,
-    players: [{id: 0, name: 'Tomi', selected: false}, {id: 1, name: 'Teppo', selected: false}, {id: 2, name: 'Pete', selected: false}]
+    players: [{id: 0, name: 'Tomi', selected: false}, {id: 1, name: 'Teppo', selected: false}, {
+        id: 2,
+        name: 'Pete',
+        selected: false
+    }]
 }
 
-function loadGameSettings (): GameSettings {
+function loadGameSettings(): GameSettings {
     let storageItem = localStorage.getItem(GAME_SETTINGS);
     if (storageItem) {
         try {
             return JSON.parse(storageItem);
-        } catch(error) {
+        } catch (error) {
             console.error("Game settings corrupted, restoring default settings");
         }
     }
@@ -34,11 +40,10 @@ function loadGameSettings (): GameSettings {
 
 let gameSettings: GameSettings = loadGameSettings();
 
-function addPlayer (name: string, selected: boolean): boolean {
-    if(gameSettings.players.find((p) => p.name.toLowerCase().trim() === name.toLowerCase())) {
+function addPlayer(name: string, selected: boolean): boolean {
+    if (gameSettings.players.find((p) => p.name.toLowerCase().trim() === name.toLowerCase())) {
         return false;
-    }
-    else if (name.trim().length > 16) {
+    } else if (name.trim().length > 16) {
         return false;
     }
     let player: Player = {
@@ -51,7 +56,24 @@ function addPlayer (name: string, selected: boolean): boolean {
     return true;
 }
 
-function saveGameSettings () {
+function validatePlayerName(name: string): string {
+    // Check length
+    if (name.length > NAME_MAX_LENGTH || name.length < NAME_MIN_LENGTH) {
+        return `Nimen täytyy olla ${NAME_MIN_LENGTH}-${NAME_MAX_LENGTH} merkkiä!`;
+    }
+
+    // Check availability
+    for (const player of gameSettings.players) {
+        if (name.toLowerCase().trim() === player.name.toLowerCase()) {
+            return "Nimi on jo käytössä!";
+        }
+    }
+
+    // Passed
+    return "";
+}
+
+function saveGameSettings() {
     localStorage.setItem(GAME_SETTINGS, JSON.stringify(gameSettings));
 }
 

@@ -20,7 +20,6 @@ const route_addplayer = Vue.component('route_addplayer', {
     </div>`,
     data() {
         return {
-            NAME_MAX_LENGTH: 16,
             name: "",
             autoSelectPlayerOptions: [
                 { selected: true, label: "Kyllä", value: true },
@@ -33,26 +32,17 @@ const route_addplayer = Vue.component('route_addplayer', {
         this.$refs.nameInput.focus();
     },
     watch: {
-        name() {
-            this.validateName();
+        name(name) {
+            this.validationError = validatePlayerName(name);
         }
     },
     methods: {
-        validateName() {
-            for (const player of gameSettings.players) {
-                if (this.name.toLowerCase().trim() === player.name.toLowerCase()) {
-                    this.validationError = "Nimi on jo käytössä!";
-                    return;
-                }
-            }
-            if (this.name.length > this.NAME_MAX_LENGTH) {
-                this.validationError = `Nimi voi olla korkeintaan ${this.NAME_MAX_LENGTH} merkkiä!`;
+        savePlayer() {
+            this.validationError = validatePlayerName(this.name);
+            if (this.validationError) {
                 return;
             }
 
-            this.validationError = "";
-        },
-        savePlayer() {
             let name = this.name.trim();
             let selected = this.autoSelectPlayerOptions.find(o => o.selected).value;
             if(addPlayer(name, selected)) {
