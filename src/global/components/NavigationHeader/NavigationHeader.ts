@@ -1,7 +1,8 @@
 Vue.component('NavigationHeader', {
     props: {
         title: String, // title to be shown on the header
-        previousExecute: () => {}, // method, if provided, overrides default functionality when clicking back btn
+        previousExecute: () => {
+        }, // method, if provided, overrides default functionality when clicking back btn
     },
     template: `<div class="component-navigation-header">
 
@@ -17,14 +18,16 @@ Vue.component('NavigationHeader', {
     </header>
 
     </div>`,
-    data () {
+    data() {
         return {
-            theme: applicationSettings.theme
+            theme: applicationSettings.theme,
+            guiState: guiState
         }
     },
     methods: {
         onPrevious() {
             vibrate();
+            guiState.pageAnimationDirection = "from-left";
             if (!!this.previousExecute) {
                 this.previousExecute();
             } else {

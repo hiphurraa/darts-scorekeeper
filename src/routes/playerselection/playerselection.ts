@@ -3,7 +3,7 @@ const route_playerselection = Vue.component('route_playerselection', {
 
         <NavigationHeader title="Uusi peli (2/2)"></NavigationHeader>
 
-        <div class="page-content">
+        <div class="page-content" :class="guiState.pageAnimationDirection">
             <div class="player-list input-container">
                 <div class="header">Valitse pelaajat (valittuna: {{nSelectedPlayers}})</div>
                 <div v-for="player in gameSettings.players" class="player" 
@@ -14,11 +14,12 @@ const route_playerselection = Vue.component('route_playerselection', {
                 </div>
             </div>
         
-            <div @click="toAddPlayerPage" class="button-s secondary full-width">+ Luo uusi pelaaja</div>
+            <div @click="toPage('/addplayer', 'from-top')" class="button-s secondary full-width">+ Luo uusi pelaaja</div>
             
             <div class="button-l continue default" @click="startGame" :class="{disabled: !isGameSettingsValid}">Aloita peli</div>
         </div>
     </div>`,
+    mixins: [pageMixin],
     data () {
         return {
             gameSettings: gameSettings as GameSettings,
@@ -37,13 +38,8 @@ const route_playerselection = Vue.component('route_playerselection', {
                     return player.selected;
                 })
                 createNewGame(selectedPlayers);
-                this.$router.push('/ingame');
+                this.toPage('/ingame', 'from-bottom');
             }
-        },
-
-        toAddPlayerPage() {
-            vibrate();
-            this.$router.push('/addplayer');
         },
 
         toggleSelection (player: Player) {

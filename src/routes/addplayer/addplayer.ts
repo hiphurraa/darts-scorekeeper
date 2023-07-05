@@ -1,5 +1,5 @@
 const route_addplayer = Vue.component('route_addplayer', {
-    template: `<div class="page-addplayer">
+    template: `<div class="page-addplayer" :class="guiState.pageAnimationDirection">
 
         <NavigationHeader title="Uusi pelaaja"></NavigationHeader>
         
@@ -18,17 +18,18 @@ const route_addplayer = Vue.component('route_addplayer', {
         </div>
         
     </div>`,
+    mixins: [pageMixin],
     data() {
         return {
             name: "",
             autoSelectPlayerOptions: [
-                { selected: true, label: "Kyllä", value: true },
-                { selected: false, label: "Ei", value: false }
+                {selected: true, label: "Kyllä", value: true},
+                {selected: false, label: "Ei", value: false}
             ] as RadioOption[],
             validationError: ""
         }
     },
-    mounted () {
+    mounted() {
         this.$refs.nameInput.focus();
     },
     watch: {
@@ -45,8 +46,9 @@ const route_addplayer = Vue.component('route_addplayer', {
 
             let name = this.name.trim();
             let selected = this.autoSelectPlayerOptions.find(o => o.selected).value;
-            if(addPlayer(name, selected)) {
+            if (addPlayer(name, selected)) {
                 vibrate();
+                guiState.pageAnimationDirection = "from-right";
                 router.back();
             }
         }

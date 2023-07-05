@@ -2,27 +2,22 @@ const route_newgame = Vue.component('route_newgame', {
     template: `<div class="page-newgame">
     <NavigationHeader title="Uusi peli (1/2)"></NavigationHeader>
         
-    <div class="gamesettings-menu page-content">
+    <div class="gamesettings-menu page-content" :class="guiState.pageAnimationDirection">
             <CustomRadio title="Aloituspisteet" :options="startingPointsOptions"
                 @selected="(o) => {startingPointsOptions = o}">
             </CustomRadio>
             <CustomRadio title="Alkaa tuplalla" :options="startsWithDoubleOptions" 
                 @selected="(o) => {startsWithDoubleOptions = o}">
             </CustomRadio>
-            <div class="button-l default continue" @click="toPlayerSelectionPage">Jatka</div>
+            <div class="button-l default continue" @click="toPage('/playerselection')">Jatka</div>
     </div>
     
     </div>`,
-    methods: {
-        toPlayerSelectionPage() {
-            vibrate();
-            this.$router.push('/playerselection');
-        },
-    },
+    mixins: [pageMixin],
     data() {
         return {
             startsWithDoubleOptions: [
-                {selected: false, label: "Kyllä", value: true, disabled: true},
+                {selected: false, label: "Kyllä", value: true},
                 {selected: false, label: "Ei", value: false}
             ] as RadioOption[],
             startingPointsOptions: [

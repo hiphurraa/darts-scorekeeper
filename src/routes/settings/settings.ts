@@ -1,12 +1,15 @@
 const route_settings = Vue.component('route_settings', {
     template: `<div class="page-settings">
+
         <NavigationHeader title="Asetukset"></NavigationHeader>
-        <div class="page-content">
+        
+        <div class="page-content" :class="guiState.pageAnimationDirection">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
-            <div class="button-s clear-all" @click="clearAll">Resetoi sovellus</div>
+            <div class="button-s mt5" @click="clearAll">Resetoi sovellus</div>
         </div>
     </div>`,
+    mixins: [pageMixin],
     data() {
         return {
             themeOptions: [

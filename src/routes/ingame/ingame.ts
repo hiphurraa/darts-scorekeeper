@@ -1,7 +1,7 @@
 const route_ingame = Vue.component('route_ingame', {
-    template: `<div class="page-ingame">
+    template: `<div class="page-ingame" :class="guiState.pageAnimationDirection">
 
-        <InGameMenu v-if="!isGameOver"></InGameMenu>
+        <InGameMenu v-if="!isGameOver" @to-page="toPage"></InGameMenu>
 
         <div class="score-status">
             <div class="scoreboard">
@@ -41,7 +41,7 @@ const route_ingame = Vue.component('route_ingame', {
             <div v-if="isGameOver" class="game-over-notification">
                 <div>Peli on päättynyt!</div>
                 <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
-                <div class="button-s default mt4" @click="toMainMenu">Siirry päävalikkoon</div>
+                <div class="button-s default mt4" @click="toPage('/', 'from-bottom')">Siirry päävalikkoon</div>
                 <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
                 <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
             </div>
@@ -91,6 +91,7 @@ const route_ingame = Vue.component('route_ingame', {
             </div>
         </div>
     </div>`,
+    mixins: [pageMixin],
     data() {
         return {
             game: currentGame,
@@ -107,9 +108,6 @@ const route_ingame = Vue.component('route_ingame', {
         }
     },
     methods: {
-        toMainMenu() {
-            router.push("/");
-        },
         continueGameDespiteWinner() {
             alert("not implemented yet!");
         },

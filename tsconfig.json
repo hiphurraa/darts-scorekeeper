@@ -15,11 +15,15 @@
     "src/global/state/GameSettings.ts",
     "src/global/state/ApplicationSettings.ts",
     "src/global/state/CurrentGame.ts",
+    "src/global/state/GuiState.ts",
 
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",
     "src/global/components/CustomRadio/CustomRadio.ts",
     "src/global/components/InGameMenu/InGameMenu.ts",
+
+    /* Mixins */
+    "src/global/mixins/PageMixin.ts",
 
     /* Pages */
     "src/routes/mainmenu/mainmenu.ts",

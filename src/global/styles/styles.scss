@@ -118,11 +118,6 @@ body {
   width: 100% !important;
 }
 
-.page-content {
-  padding: 2vmin;
-  width: 100%;
-}
-
 .input-container {
   width: 100%;
   display: flex;
@@ -146,6 +141,11 @@ body {
   font-size: 5vmin;
   padding: 1vmin;
   text-align: center;
+}
+
+.page-content {
+  padding: 2vmin;
+  width: 100%;
 }
 
 .mb1 {

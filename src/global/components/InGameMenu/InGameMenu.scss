@@ -1,11 +1,11 @@
 :root {
   --ingamemenu-burger-color: #969696;
-  --ingamemenu-bg-color: #3b3b3b;
-
+  --ingamemenu-bg-color: var(--background-color);
 }
 
 :root[data-theme='dark'] {
   --ingamemenu-burger-color: #969696;
+  --ingamemenu-bg-color: var(--background-color);
 }
 
 @keyframes slide-in-from-right-top {

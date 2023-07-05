@@ -9,8 +9,8 @@ Vue.component("InGameMenu", {
         </div>
         
         <div v-if="isMenuShown" class="menu">
-            <div class="button-m" @click="toMainMenu">Päävalikko</div>
-            <div class="button-m mt5" @click="toSettings">Asetukset</div>
+            <div class="button-m default" @click="toPage('/', 'from-bottom')">Päävalikko</div>
+            <div class="button-m default mt5" @click="toPage('/settings', 'from-right')">Asetukset</div>
         </div>
         
     </div>`,
@@ -23,12 +23,10 @@ Vue.component("InGameMenu", {
         toggleMenu() {
             this.isMenuShown = !this.isMenuShown;
         },
-        toMainMenu() {
-            router.push("/");
-        },
-        toSettings () {
-            router.push("/settings");
-        },
+        toPage(route, animation) {
+            console.log({route, animation});
+            this.$emit('to-page', route, animation);
+        }
     }
 });
 
