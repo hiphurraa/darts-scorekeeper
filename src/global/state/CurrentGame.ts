@@ -8,6 +8,7 @@ declare interface Dart {
 declare interface Turn {
     darts: Dart[]
     player: Player,
+    bust: boolean
 }
 
 declare interface Game {
@@ -35,7 +36,7 @@ function saveGame() {
 }
 
 function createNewGame(players: Player[]) {
-    currentGame = {players, turns: [{player: players[0], darts: []}], finished: false};
+    currentGame = {players, turns: [{player: players[0], darts: [], bust: false}], finished: false};
     saveGame();
 }
 
@@ -55,6 +56,7 @@ function newTurn() {
     currentGame.turns.push({
         darts: [],
         player: nextPlayer,
+        bust: false
     });
 
     saveGame();

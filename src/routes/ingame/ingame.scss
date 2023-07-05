@@ -53,6 +53,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     .scoreboard {
       width: 100%;
@@ -113,6 +114,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
 
             & > div {
               display: flex;
@@ -128,6 +130,19 @@
 
             &:not(:first-child) {
               margin-left: 10vmin;
+            }
+
+            .bust {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              color: var(--attention-text-color);
+              transform: translateY(-83%);
+              display: flex;
+              justify-content: center;
+              font-size: 5vmin;
+              font-weight: bold;
             }
           }
         }
@@ -232,5 +247,17 @@
         }
       }
     }
+  }
+
+  .game-over-notification {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    padding: 5vmin;
+    font-size: 5vmin;
   }
 }

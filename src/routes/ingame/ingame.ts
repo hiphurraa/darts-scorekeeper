@@ -10,27 +10,38 @@ const route_ingame = Vue.component('route_ingame', {
                         <div class="total-score">{{ getScore(player) }}</div>
                     </div>
                     <div v-if="turn.player.id === player.id" class="turn-info">
-                        <div class="dart" :class="{empty: !turn.darts[0], active: !turn.darts[0]}">
+                        <div class="dart" :class="{empty: !turn.darts[0], active: !waitForOk && !turn.darts[0]}">
                             <div v-if="turn.darts[0]">
                                 <span class="factor">{{ getFactor(0) }}</span>
                                 <span class="score">{{ turn.darts[0].score }}</span>
+                                <span v-if="turn.darts.length === 1 && turn.bust" class="bust">BUST</span>
                             </div>
                         </div>
-                        <div class="dart" :class="{empty: !turn.darts[1], active: !!turn.darts[0] && !turn.darts[1]}">
+                        <div class="dart" :class="{empty: !turn.darts[1], active: !waitForOk && !!turn.darts[0] && !turn.darts[1]}">
                             <div v-if="turn.darts[1]">
                                 <span class="factor">{{ getFactor(1) }}</span>
                                 <span class="score">{{ turn.darts[1].score }}</span>
+                                <span v-if="turn.darts.length === 2 && turn.bust" class="bust">BUST</span>
                             </div>
                         </div>
                         <div class="dart" 
-                        :class="{empty: !turn.darts[2], active: !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
+                        :class="{empty: !turn.darts[2], active: !waitForOk && !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
                             <div v-if="turn.darts[2]">
                                 <span class="factor">{{ getFactor(2) }}</span>
                                 <span class="score">{{ turn.darts[2].score }}</span>
+                                <span v-if="turn.darts.length === 3 && turn.bust" class="bust">BUST</span>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div v-if="isGameOver" class="game-over-notification">
+                <div>Peli on päättynyt!</div>
+                <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
+                <div class="button-s default mt4" @click="toMainMenu">Siirry päävalikkoon</div>
+                <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
+                <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
             </div>
         </div>
         
@@ -39,45 +50,44 @@ const route_ingame = Vue.component('route_ingame', {
                 <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
                     @click="onCancel">PERU
                 </div>
-                <div class="input one4th factor" :class="{active: double, disabled: disableDigits}" @click="on2x">2x</div>
-                <div class="input one4th factor" :class="{active: triple, disabled: disableDigits}" @click="on3x">3x</div>
-                <div class="input one4th confirm" :class="{disabled: turn.darts.length !== 3}" @click="nextTurn">OK</div>
+                <div class="input one4th factor" :class="{active: double, disabled: waitForOk}" @click="on2x">2x</div>
+                <div class="input one4th factor" :class="{active: triple, disabled: waitForOk}" @click="on3x">3x</div>
+                <div class="input one4th confirm" :class="{disabled: !waitForOk || isGameOver}" @click="onOk">OK</div>
             </div>
             <div class="input-row">
-                <div class="input digit one5th" @click="onInput(1)" :class="{disabled: disableDigits}">1</div>
-                <div class="input digit one5th" @click="onInput(2)" :class="{disabled: disableDigits}">2</div>
-                <div class="input digit one5th" @click="onInput(3)" :class="{disabled: disableDigits}">3</div>
-                <div class="input digit one5th" @click="onInput(4)" :class="{disabled: disableDigits}">4</div>
-                <div class="input digit one5th" @click="onInput(5)" :class="{disabled: disableDigits}">5</div>
+                <div class="input digit one5th" @click="onInput(1)" :class="{disabled: waitForOk}">1</div>
+                <div class="input digit one5th" @click="onInput(2)" :class="{disabled: waitForOk}">2</div>
+                <div class="input digit one5th" @click="onInput(3)" :class="{disabled: waitForOk}">3</div>
+                <div class="input digit one5th" @click="onInput(4)" :class="{disabled: waitForOk}">4</div>
+                <div class="input digit one5th" @click="onInput(5)" :class="{disabled: waitForOk}">5</div>
             </div>
             <div class="input-row">
-                <div class="input digit one5th" @click="onInput(6)" :class="{disabled: disableDigits}">6</div>
-                <div class="input digit one5th" @click="onInput(7)" :class="{disabled: disableDigits}">7</div>
-                <div class="input digit one5th" @click="onInput(8)" :class="{disabled: disableDigits}">8</div>
-                <div class="input digit one5th" @click="onInput(9)" :class="{disabled: disableDigits}">9</div>
-                <div class="input digit one5th" @click="onInput(10)" :class="{disabled: disableDigits}">10</div>
+                <div class="input digit one5th" @click="onInput(6)" :class="{disabled: waitForOk}">6</div>
+                <div class="input digit one5th" @click="onInput(7)" :class="{disabled: waitForOk}">7</div>
+                <div class="input digit one5th" @click="onInput(8)" :class="{disabled: waitForOk}">8</div>
+                <div class="input digit one5th" @click="onInput(9)" :class="{disabled: waitForOk}">9</div>
+                <div class="input digit one5th" @click="onInput(10)" :class="{disabled: waitForOk}">10</div>
             </div>
             <div class="input-row">
-                <div class="input digit one5th" @click="onInput(11)" :class="{disabled: disableDigits}">11</div>
-                <div class="input digit one5th" @click="onInput(12)" :class="{disabled: disableDigits}">12</div>
-                <div class="input digit one5th" @click="onInput(13)" :class="{disabled: disableDigits}">13</div>
-                <div class="input digit one5th" @click="onInput(14)" :class="{disabled: disableDigits}">14</div>
-                <div class="input digit one5th" @click="onInput(15)" :class="{disabled: disableDigits}">15</div>
+                <div class="input digit one5th" @click="onInput(11)" :class="{disabled: waitForOk}">11</div>
+                <div class="input digit one5th" @click="onInput(12)" :class="{disabled: waitForOk}">12</div>
+                <div class="input digit one5th" @click="onInput(13)" :class="{disabled: waitForOk}">13</div>
+                <div class="input digit one5th" @click="onInput(14)" :class="{disabled: waitForOk}">14</div>
+                <div class="input digit one5th" @click="onInput(15)" :class="{disabled: waitForOk}">15</div>
             </div>
             <div class="input-row">
-                <div class="input digit one5th" @click="onInput(16)" :class="{disabled: disableDigits}">16</div>
-                <div class="input digit one5th" @click="onInput(17)" :class="{disabled: disableDigits}">17</div>
-                <div class="input digit one5th" @click="onInput(18)" :class="{disabled: disableDigits}">18</div>
-                <div class="input digit one5th" @click="onInput(19)" :class="{disabled: disableDigits}">19</div>
-                <div class="input digit one5th" @click="onInput(20)" :class="{disabled: disableDigits}">20</div>
+                <div class="input digit one5th" @click="onInput(16)" :class="{disabled: waitForOk}">16</div>
+                <div class="input digit one5th" @click="onInput(17)" :class="{disabled: waitForOk}">17</div>
+                <div class="input digit one5th" @click="onInput(18)" :class="{disabled: waitForOk}">18</div>
+                <div class="input digit one5th" @click="onInput(19)" :class="{disabled: waitForOk}">19</div>
+                <div class="input digit one5th" @click="onInput(20)" :class="{disabled: waitForOk}">20</div>
             </div>
             <div class="input-row">
-                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: disableDigits}">0</div>
-                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: disableDigits}">25</div>
-                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: disableDigits}">50</div>
+                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</div>
+                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk}">25</div>
+                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk}">50</div>
             </div>
         </div>
-
     </div>`,
     data() {
         return {
@@ -86,16 +96,26 @@ const route_ingame = Vue.component('route_ingame', {
             double: false,
             triple: false,
             scoreStatuses: [],
+            isGameOver: currentGame.finished,
         };
     },
     computed: {
-        disableDigits() {
-            return this.turn.darts.length === 3;
+        waitForOk(): boolean {
+            return this.turn.darts.length === 3 || this.getScore(this.turn.player) === 0 || this.turn.bust;
         }
     },
     methods: {
+        toMainMenu() {
+            router.push("/");
+        },
+        continueGameDespiteWinner() {
+            alert("not implemented yet!");
+        },
+        restartGame () {
+            alert("not implemented yet!");
+        },
         onInput(score) {
-            if(this.turn.darts.length === 3) {
+            if(this.waitForOk || this.isGameOver) {
                 return;
             }
 
@@ -118,14 +138,17 @@ const route_ingame = Vue.component('route_ingame', {
             // add dart
             this.turn.darts.push({score, factor});
 
-            // check if score went under zero and act accordingly
-            if (this.getScore(this.turn.player) < 0) {
-                this.turn.darts = [{score: 0, factor: 1}, {score: 0, factor: 1}, {score: 0, factor: 1}];
+            // check for bust
+            let updatedScore = this.getScore(this.turn.player);
+            if ((updatedScore < 2 && updatedScore !== 0) || (updatedScore === 0 && factor !== 2)) {
+                // was bust
+                this.turn.bust = true;
             }
+
             saveGame();
         },
         on2x() {
-            if (this.turn.darts.length === 3) {
+            if (this.waitForOk || this.isGameOver) {
                 return;
             }
 
@@ -134,7 +157,7 @@ const route_ingame = Vue.component('route_ingame', {
             this.double = !this.double;
         },
         on3x() {
-            if (this.turn.darts.length === 3) {
+            if (this.waitForOk || this.isGameOver) {
                 return;
             }
 
@@ -148,25 +171,38 @@ const route_ingame = Vue.component('route_ingame', {
             }
 
             vibrate();
-
             this.double = false;
             this.triple = false;
 
-            if (this.turn.darts.length) {
+            if (this.isGameOver) {
+                this.isGameOver = false;
+                currentGame.finished = false;
+            } else if (this.turn.bust) {
+                this.turn.bust = false;
+                this.turn.darts.pop();
+            } else if (this.turn.darts.length) {
                 this.turn.darts.pop();
             } else if (currentGame.turns.length > 1){
                 currentGame.turns.pop();
             }
+
             this.turn = currentGame.turns[currentGame.turns.length - 1]
             saveGame();
         },
-        nextTurn () {
-            if (this.turn.darts.length !== 3) {
+        onOk () {
+            if (!this.waitForOk || this.isGameOver) {
                 return;
             }
+
             vibrate();
+
+            if (this.getScore(this.turn.player) === 0) {
+                this.gameOver();
+                return;
+            }
+
             newTurn();
-            this.turn = currentGame.turns[currentGame.turns.length - 1]
+            this.turn = currentGame.turns[currentGame.turns.length - 1];
         },
         getFactor(dartIndex: number) {
             let dart: Dart = this.turn.darts[dartIndex];
@@ -186,11 +222,16 @@ const route_ingame = Vue.component('route_ingame', {
         getScore(player: Player) {
             let score = gameSettings.startingPoints;
             currentGame.turns.forEach((turn: Turn) => {
-                if (turn.player.id === player.id) {
+                if (turn.player.id === player.id && !turn.bust) {
                     score -= turn.darts.reduce((acc, dart) => acc + (dart.score * dart.factor), 0);
                 }
             });
             return score;
+        },
+        gameOver() {
+            this.isGameOver = true;
+            currentGame.finished = true;
+            saveGame();
         }
     },
 });

@@ -2,7 +2,7 @@ let route_mainmenu = Vue.component('route_mainmenu', {
     template: `<div class="page-mainmenu"> 
         <div class="header">
             <span>DARTS</span>
-            <span>SCOREKEEPER</span>
+            <span>PISTELASKURI</span>
         </div>
         <div class="buttons-wrapper">
             <div class="button-l default" @click="toGameCreation">Uusi peli</div>
