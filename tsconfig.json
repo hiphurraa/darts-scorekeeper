@@ -19,6 +19,7 @@
     /* Global components */
     "src/global/components/NavigationHeader/NavigationHeader.ts",
     "src/global/components/CustomRadio/CustomRadio.ts",
+    "src/global/components/InGameMenu/InGameMenu.ts",
 
     /* Pages */
     "src/routes/mainmenu/mainmenu.ts",

@@ -9,7 +9,7 @@ let route_mainmenu = Vue.component('route_mainmenu', {
             <div class="button-l mt4" @click="toSettings">Asetukset</div>
         </div>
         <div v-if="showContinueGamePrompt" class="continue-game-prompt">
-                <div class="prompt-text">Jatka aiemmin kesken jäänyttä peliä?</div>
+                <div class="prompt-text">Jatka keskeytettyä peliä?</div>
                 <div class="button-s default" @click="continueUnfinishedGame">Jatka</div>
             </div>
     </div>`,

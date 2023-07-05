@@ -1,6 +1,8 @@
 const route_ingame = Vue.component('route_ingame', {
     template: `<div class="page-ingame">
 
+        <InGameMenu></InGameMenu>
+
         <div class="score-status">
             <div class="scoreboard">
                 <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
