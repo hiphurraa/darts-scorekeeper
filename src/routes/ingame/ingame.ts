@@ -102,6 +102,11 @@ const route_ingame = Vue.component('route_ingame', {
             isGameOver: currentGame.finished,
         };
     },
+    created () {
+        if (!currentGame) {
+            this.toPage('/', 'from-top');
+        }
+    },
     computed: {
         waitForOk(): boolean {
             return this.turn.darts.length === 3 || this.getScore(this.turn.player) === 0 || this.turn.bust;
