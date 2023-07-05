@@ -38,7 +38,7 @@ const route_playerselection = Vue.component('route_playerselection', {
                     return player.selected;
                 })
                 createNewGame(selectedPlayers);
-                this.toPage('/ingame', 'from-bottom');
+                this.toPage('/ingame');
             }
         },
 

@@ -41,7 +41,7 @@ const route_ingame = Vue.component('route_ingame', {
             <div v-if="isGameOver" class="game-over-notification">
                 <div>Peli on päättynyt!</div>
                 <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
-                <div class="button-s default mt4" @click="toPage('/', 'from-bottom')">Siirry päävalikkoon</div>
+                <div class="button-s default mt4" @click="toPage('/', 'from-top')">Siirry päävalikkoon</div>
                 <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
                 <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
             </div>
