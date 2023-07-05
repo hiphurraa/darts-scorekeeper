@@ -84,8 +84,8 @@ const route_ingame = Vue.component('route_ingame', {
             </div>
             <div class="input-row">
                 <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</div>
-                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk}">25</div>
-                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk}">50</div>
+                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk || triple}">25</div>
+                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk || double || triple}">50</div>
             </div>
         </div>
     </div>`,
@@ -117,9 +117,18 @@ const route_ingame = Vue.component('route_ingame', {
         onInput(score) {
             if(this.waitForOk || this.isGameOver) {
                 return;
+            } else if (this.triple && score === 25) {
+                return;
+            }  else if ((this.double || this.triple) && score === 50) {
+                return;
             }
 
             vibrate();
+
+            if (score === 25 && this.double) {
+                score = 50;
+                this.double = false;
+            }
 
             // apply factor
             let factor = 1;
@@ -140,7 +149,7 @@ const route_ingame = Vue.component('route_ingame', {
 
             // check for bust
             let updatedScore = this.getScore(this.turn.player);
-            if ((updatedScore < 2 && updatedScore !== 0) || (updatedScore === 0 && factor !== 2)) {
+            if ((updatedScore < 2 && updatedScore !== 0) || (updatedScore === 0 && factor !== 2 && score !== 50)) {
                 // was bust
                 this.turn.bust = true;
             }
