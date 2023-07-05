@@ -11,11 +11,11 @@ const route_settings = Vue.component('route_settings', {
         return {
             themeOptions: [
                 {selected: false, label: "Tumma", value: 'dark'},
-                {selected: false, label: "Vaalea", value: 'light'},
+                {selected: false, label: "Vaalea", value: 'light', disabled: true},
             ] as RadioOption[],
             languageOptions: [
                 {selected: false, label: "Suomi", value: 'fi'},
-                {selected: false, label: "Englanti", value: 'en'},
+                {selected: false, label: "Englanti", value: 'en', disabled: true},
             ] as RadioOption[]
         }
     },

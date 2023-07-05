@@ -22,13 +22,13 @@ const route_newgame = Vue.component('route_newgame', {
     data() {
         return {
             startsWithDoubleOptions: [
-                {selected: false, label: "Kyllä", value: true},
+                {selected: false, label: "Kyllä", value: true, disabled: true},
                 {selected: false, label: "Ei", value: false}
-            ],
+            ] as RadioOption[],
             startingPointsOptions: [
                 {selected: false, label: "301", value: 301},
                 {selected: false, label: "501", value: 501}
-            ],
+            ] as RadioOption[],
             sliderPosition: 1,
             isValid: false,
         };
