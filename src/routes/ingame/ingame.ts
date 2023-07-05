@@ -1,7 +1,7 @@
 const route_ingame = Vue.component('route_ingame', {
     template: `<div class="page-ingame">
 
-        <InGameMenu></InGameMenu>
+        <InGameMenu v-if="!isGameOver"></InGameMenu>
 
         <div class="score-status">
             <div class="scoreboard">
