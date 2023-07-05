@@ -19,6 +19,11 @@ Vue.component("InGameMenu", {
             isMenuShown: false,
         };
     },
+    watch: {
+        isMenuShown(isShown) {
+            this.$emit('toggled', isShown);
+        },
+    },
     methods: {
         toggleMenu() {
             this.isMenuShown = !this.isMenuShown;

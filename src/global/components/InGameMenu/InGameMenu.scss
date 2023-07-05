@@ -8,20 +8,12 @@
   --ingamemenu-bg-color: var(--background-color);
 }
 
-@keyframes slide-in-from-right-top {
-  0% {
-    transform: translate(100%, -100%);
-    border-radius: 0 0 0 100vmin;
-    opacity: 0;
+@keyframes slide-in-from-right {
+  from {
+    transform: translate(100%, 0);
   }
-  50% {
-    border-radius: 0 0 0 100vmin;
-    opacity: 0.25;
-  }
-  100% {
+  to {
     transform: translate(0, 0);
-    border-radius: 0;
-    opacity: 1;
   }
 }
 
@@ -35,7 +27,7 @@
     right: 0;
     bottom: 0;
     background-color: var(--ingamemenu-bg-color);
-    animation: slide-in-from-right-top 0.3s forwards;
+    animation: slide-in-from-right 0.3s forwards;
     padding: 10vmin 5vmin;
     display: flex;
     flex-direction: column;

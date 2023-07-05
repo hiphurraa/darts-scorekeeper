@@ -1,95 +1,98 @@
 const route_ingame = Vue.component('route_ingame', {
     template: `<div class="page-ingame" :class="guiState.pageAnimationDirection">
 
-        <InGameMenu v-if="!isGameOver" @to-page="toPage"></InGameMenu>
-
-        <div class="score-status">
-            <div class="scoreboard">
-                <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
-                    <div class="player-info">
-                        <span class="player-order-number">{{ i+1 }}.</span>
-                        <div class="name">{{ player.name }}</div>
-                        <div class="total-score">{{ getScore(player) }}</div>
+        <div class="ingame-page-content" ref="page">
+            <div class="score-status">
+                <div class="scoreboard">
+                    <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
+                        <div class="player-info">
+                            <span class="player-order-number">{{ i+1 }}.</span>
+                            <div class="name">{{ player.name }}</div>
+                            <div class="total-score">{{ getScore(player) }}</div>
+                        </div>
+                        <div v-if="turn.player.id === player.id" class="turn-info">
+                            <div class="dart" :class="{empty: !turn.darts[0], active: !waitForOk && !turn.darts[0]}">
+                                <div v-if="turn.darts[0]">
+                                    <span class="factor">{{ getFactor(0) }}</span>
+                                    <span class="score">{{ turn.darts[0].score }}</span>
+                                    <span v-if="turn.darts.length === 1 && turn.bust" class="bust">BUST</span>
+                                </div>
+                            </div>
+                            <div class="dart" :class="{empty: !turn.darts[1], active: !waitForOk && !!turn.darts[0] && !turn.darts[1]}">
+                                <div v-if="turn.darts[1]">
+                                    <span class="factor">{{ getFactor(1) }}</span>
+                                    <span class="score">{{ turn.darts[1].score }}</span>
+                                    <span v-if="turn.darts.length === 2 && turn.bust" class="bust">BUST</span>
+                                </div>
+                            </div>
+                            <div class="dart" 
+                            :class="{empty: !turn.darts[2], active: !waitForOk && !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
+                                <div v-if="turn.darts[2]">
+                                    <span class="factor">{{ getFactor(2) }}</span>
+                                    <span class="score">{{ turn.darts[2].score }}</span>
+                                    <span v-if="turn.darts.length === 3 && turn.bust" class="bust">BUST</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div v-if="turn.player.id === player.id" class="turn-info">
-                        <div class="dart" :class="{empty: !turn.darts[0], active: !waitForOk && !turn.darts[0]}">
-                            <div v-if="turn.darts[0]">
-                                <span class="factor">{{ getFactor(0) }}</span>
-                                <span class="score">{{ turn.darts[0].score }}</span>
-                                <span v-if="turn.darts.length === 1 && turn.bust" class="bust">BUST</span>
-                            </div>
-                        </div>
-                        <div class="dart" :class="{empty: !turn.darts[1], active: !waitForOk && !!turn.darts[0] && !turn.darts[1]}">
-                            <div v-if="turn.darts[1]">
-                                <span class="factor">{{ getFactor(1) }}</span>
-                                <span class="score">{{ turn.darts[1].score }}</span>
-                                <span v-if="turn.darts.length === 2 && turn.bust" class="bust">BUST</span>
-                            </div>
-                        </div>
-                        <div class="dart" 
-                        :class="{empty: !turn.darts[2], active: !waitForOk && !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
-                            <div v-if="turn.darts[2]">
-                                <span class="factor">{{ getFactor(2) }}</span>
-                                <span class="score">{{ turn.darts[2].score }}</span>
-                                <span v-if="turn.darts.length === 3 && turn.bust" class="bust">BUST</span>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                
+                <div v-if="isGameOver" class="game-over-notification">
+                    <div>Peli on päättynyt!</div>
+                    <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
+                    <div class="button-s default mt4" @click="toPage('/', 'from-top')">Siirry päävalikkoon</div>
+                    <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
+                    <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
                 </div>
             </div>
             
-            <div v-if="isGameOver" class="game-over-notification">
-                <div>Peli on päättynyt!</div>
-                <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
-                <div class="button-s default mt4" @click="toPage('/', 'from-top')">Siirry päävalikkoon</div>
-                <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
-                <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
-            </div>
-        </div>
-        
-        <div class="score-input">
-            <div class="input-row">
-                <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
-                    @click="onCancel">PERU
+            <div class="score-input">
+                <div class="input-row">
+                    <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
+                        @click="onCancel">PERU
+                    </div>
+                    <div class="input one4th factor" :class="{active: double, disabled: waitForOk}" @click="on2x">2x</div>
+                    <div class="input one4th factor" :class="{active: triple, disabled: waitForOk}" @click="on3x">3x</div>
+                    <div class="input one4th confirm" :class="{disabled: !waitForOk || isGameOver}" @click="onOk">OK</div>
                 </div>
-                <div class="input one4th factor" :class="{active: double, disabled: waitForOk}" @click="on2x">2x</div>
-                <div class="input one4th factor" :class="{active: triple, disabled: waitForOk}" @click="on3x">3x</div>
-                <div class="input one4th confirm" :class="{disabled: !waitForOk || isGameOver}" @click="onOk">OK</div>
-            </div>
-            <div class="input-row">
-                <div class="input digit one5th" @click="onInput(1)" :class="{disabled: waitForOk}">1</div>
-                <div class="input digit one5th" @click="onInput(2)" :class="{disabled: waitForOk}">2</div>
-                <div class="input digit one5th" @click="onInput(3)" :class="{disabled: waitForOk}">3</div>
-                <div class="input digit one5th" @click="onInput(4)" :class="{disabled: waitForOk}">4</div>
-                <div class="input digit one5th" @click="onInput(5)" :class="{disabled: waitForOk}">5</div>
-            </div>
-            <div class="input-row">
-                <div class="input digit one5th" @click="onInput(6)" :class="{disabled: waitForOk}">6</div>
-                <div class="input digit one5th" @click="onInput(7)" :class="{disabled: waitForOk}">7</div>
-                <div class="input digit one5th" @click="onInput(8)" :class="{disabled: waitForOk}">8</div>
-                <div class="input digit one5th" @click="onInput(9)" :class="{disabled: waitForOk}">9</div>
-                <div class="input digit one5th" @click="onInput(10)" :class="{disabled: waitForOk}">10</div>
-            </div>
-            <div class="input-row">
-                <div class="input digit one5th" @click="onInput(11)" :class="{disabled: waitForOk}">11</div>
-                <div class="input digit one5th" @click="onInput(12)" :class="{disabled: waitForOk}">12</div>
-                <div class="input digit one5th" @click="onInput(13)" :class="{disabled: waitForOk}">13</div>
-                <div class="input digit one5th" @click="onInput(14)" :class="{disabled: waitForOk}">14</div>
-                <div class="input digit one5th" @click="onInput(15)" :class="{disabled: waitForOk}">15</div>
-            </div>
-            <div class="input-row">
-                <div class="input digit one5th" @click="onInput(16)" :class="{disabled: waitForOk}">16</div>
-                <div class="input digit one5th" @click="onInput(17)" :class="{disabled: waitForOk}">17</div>
-                <div class="input digit one5th" @click="onInput(18)" :class="{disabled: waitForOk}">18</div>
-                <div class="input digit one5th" @click="onInput(19)" :class="{disabled: waitForOk}">19</div>
-                <div class="input digit one5th" @click="onInput(20)" :class="{disabled: waitForOk}">20</div>
-            </div>
-            <div class="input-row">
-                <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</div>
-                <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk || triple}">25</div>
-                <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk || double || triple}">50</div>
+                <div class="input-row">
+                    <div class="input digit one5th" @click="onInput(1)" :class="{disabled: waitForOk}">1</div>
+                    <div class="input digit one5th" @click="onInput(2)" :class="{disabled: waitForOk}">2</div>
+                    <div class="input digit one5th" @click="onInput(3)" :class="{disabled: waitForOk}">3</div>
+                    <div class="input digit one5th" @click="onInput(4)" :class="{disabled: waitForOk}">4</div>
+                    <div class="input digit one5th" @click="onInput(5)" :class="{disabled: waitForOk}">5</div>
+                </div>
+                <div class="input-row">
+                    <div class="input digit one5th" @click="onInput(6)" :class="{disabled: waitForOk}">6</div>
+                    <div class="input digit one5th" @click="onInput(7)" :class="{disabled: waitForOk}">7</div>
+                    <div class="input digit one5th" @click="onInput(8)" :class="{disabled: waitForOk}">8</div>
+                    <div class="input digit one5th" @click="onInput(9)" :class="{disabled: waitForOk}">9</div>
+                    <div class="input digit one5th" @click="onInput(10)" :class="{disabled: waitForOk}">10</div>
+                </div>
+                <div class="input-row">
+                    <div class="input digit one5th" @click="onInput(11)" :class="{disabled: waitForOk}">11</div>
+                    <div class="input digit one5th" @click="onInput(12)" :class="{disabled: waitForOk}">12</div>
+                    <div class="input digit one5th" @click="onInput(13)" :class="{disabled: waitForOk}">13</div>
+                    <div class="input digit one5th" @click="onInput(14)" :class="{disabled: waitForOk}">14</div>
+                    <div class="input digit one5th" @click="onInput(15)" :class="{disabled: waitForOk}">15</div>
+                </div>
+                <div class="input-row">
+                    <div class="input digit one5th" @click="onInput(16)" :class="{disabled: waitForOk}">16</div>
+                    <div class="input digit one5th" @click="onInput(17)" :class="{disabled: waitForOk}">17</div>
+                    <div class="input digit one5th" @click="onInput(18)" :class="{disabled: waitForOk}">18</div>
+                    <div class="input digit one5th" @click="onInput(19)" :class="{disabled: waitForOk}">19</div>
+                    <div class="input digit one5th" @click="onInput(20)" :class="{disabled: waitForOk}">20</div>
+                </div>
+                <div class="input-row">
+                    <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</div>
+                    <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk || triple}">25</div>
+                    <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk || double || triple}">50</div>
+                </div>
             </div>
         </div>
+
+        <InGameMenu v-if="!isGameOver" @to-page="toPage" @toggled="(isShown) => {this.isMenuShown = isShown}"></InGameMenu>
+
     </div>`,
     mixins: [pageMixin],
     data() {
@@ -100,6 +103,7 @@ const route_ingame = Vue.component('route_ingame', {
             triple: false,
             scoreStatuses: [],
             isGameOver: currentGame.finished,
+            isMenuShown: false,
         };
     },
     created () {
@@ -111,6 +115,20 @@ const route_ingame = Vue.component('route_ingame', {
         waitForOk(): boolean {
             return this.turn.darts.length === 3 || this.getScore(this.turn.player) === 0 || this.turn.bust;
         }
+    },
+    watch: {
+        isMenuShown(isShown) {
+            const me = this;
+            if (!isShown) {
+                me.$refs.page.classList.add("slide-from-left");
+                me.$refs.page.classList.remove("slide-to-left");
+                setTimeout(() => {
+                    me.$refs.page.classList.remove("slide-from-left");
+                }, 300);
+            } else {
+                me.$refs.page.classList.add("slide-to-left");
+            }
+        },
     },
     methods: {
         continueGameDespiteWinner() {

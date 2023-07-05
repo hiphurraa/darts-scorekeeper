@@ -37,6 +37,24 @@
   --ingame-empty-score-bg: #3f7267;
 }
 
+@keyframes slide-to-left {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-100%, 0);
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    transform: translate(-100%, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
 .page-ingame {
   position: absolute;
   top: 0;
@@ -46,6 +64,24 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  .ingame-page-content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+
+    &.slide-to-left {
+      animation: slide-to-left 0.3s forwards;
+    }
+
+    &.slide-from-left {
+      animation: slide-from-left 0.3s forwards;
+    }
+  }
 
   .score-status {
     width: 100%;
