@@ -1,5 +1,5 @@
 :root[data-theme='dark'] {
-  --ingame-background-color: #393939;
+  --ingame-background-color: var(--background-color);
   --ingame-input-bg: #5a5a5a;
   --ingame-input-color: white;
   --ingame-miss-btn-bg: gray;

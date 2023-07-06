@@ -4,13 +4,14 @@
 }
 
 :root[data-theme='dark'] {
-  --background-color: #4d4d4d;
-  --navbar-color: #333333;
+  --background-color: #323232;
+  --container-bg: #5050507a;
+  --navbar-color: #2c2c2c;
+  --shadow-color: #000000a6;
   --default-btn-bg: #00a781;
   --selected-bg-color: #25695a;
   --selected-color: #00a983;
   --text-color: white;
-  --container-bg: #3e3e3e7a;
   --button-bg: #000000;
   --button-color: #ffffff;
   --option-bg: black;
@@ -19,10 +20,9 @@
   --selection-bg-color: #494949;
   --border-color: #494949;
   --default-btn-color: #ffffff;
-  --secondary-btn-bg: #303030;
+  --secondary-btn-bg: #484848;
   --secondary-btn-color: #ffffff;
   --error-text-color: #00f5be;
-  --shadow-color: #00000057;
   --nav-height: 20vmin;
   --select-border-color: black;
   --attention-text-color: #00f5be;

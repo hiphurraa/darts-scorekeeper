@@ -9,14 +9,15 @@ Vue.component("InGameMenu", {
         </div>
         
         <div v-if="isMenuShown" class="menu">
-            <div class="button-m default" @click="toPage('/', 'from-top')">Päävalikko</div>
-            <div class="button-m default mt5" @click="toPage('/settings', 'from-right')">Asetukset</div>
+            <div class="button-m secondary" @click="toPage('/', 'from-top')">Päävalikko</div>
+            <div class="button-m secondary mt5" @click="toPage('/settings', 'from-right')">Asetukset</div>
         </div>
         
     </div>`,
     data () {
         return {
             isMenuShown: false,
+            isDisabled: false
         };
     },
     watch: {
@@ -26,8 +27,16 @@ Vue.component("InGameMenu", {
     },
     methods: {
         toggleMenu() {
+            const me = this;
+            if (this.isDisabled) {
+                return;
+            }
             vibrate();
             this.isMenuShown = !this.isMenuShown;
+            this.isDisabled = true;
+            setTimeout(() => {
+                me.isDisabled = false;
+            }, 300);
         },
         toPage(route, animation) {
             this.$emit('to-page', route, animation);
