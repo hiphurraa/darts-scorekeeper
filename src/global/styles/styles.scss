@@ -1,50 +1,32 @@
 :root {
-  --default-btn-bg: #00a781;
-  --selected-bg-color: #9aebd8;
-  --selected-color: #00a983;
-  --nav-height: 20vmin;
-  --background-color: #ededed;
-  --text-color: black;
-  --container-bg: #fbfbfb;
-  --button-bg: #d7d7d7;
-  --button-color: black;
-  --navbar-color: #fbfbfb;
-  --shadow-color: #e1e1e1;
-  --option-bg: #ffffff;
-  --disabled-btn-bg: #e1e1e1;
-  --disabled-btn-color: #b5b5b5;
-  --select-border-color: black;
-  --selection-bg-color: #dddddd;
-  --border-color: #e7e7e7;
-  --default-btn-color: #ffffff;
-  --secondary-btn-bg: #cfcfcf;
-  --secondary-btn-color: #000000;
-  --attention-text-color: #00f5be;
-
     touch-action: pan-x pan-y;
     height: 100%
 }
 
 :root[data-theme='dark'] {
+  --background-color: #4d4d4d;
+  --navbar-color: #333333;
   --default-btn-bg: #00a781;
   --selected-bg-color: #25695a;
   --selected-color: #00a983;
-  --background-color: #333333;
   --text-color: white;
-  --container-bg: #3e3e3e;
+  --container-bg: #3e3e3e7a;
   --button-bg: #000000;
   --button-color: #ffffff;
-  --navbar-color: #303030;
-  --shadow-color: rgba(0, 0, 0, 0.91);
   --option-bg: black;
   --disabled-btn-bg: #202020;
   --disabled-btn-color: #525252;
   --selection-bg-color: #494949;
   --border-color: #494949;
   --default-btn-color: #ffffff;
-  --secondary-btn-bg: #515151;
+  --secondary-btn-bg: #303030;
   --secondary-btn-color: #ffffff;
   --error-text-color: #00f5be;
+  --shadow-color: #00000057;
+  --nav-height: 20vmin;
+  --select-border-color: black;
+  --attention-text-color: #00f5be;
+  --back-button-bg: #404040;
 }
 
 html {
@@ -177,4 +159,44 @@ body {
 }
 .mt5 {
   margin-top: 5vmin;
+}
+
+
+$an-len: 5vmin;
+
+@keyframes background-movement-1 {
+  from {
+    transform: translate(calc(-50% - $an-len), calc(-50% - $an-len));
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes background-movement-2 {
+  from {
+    transform: translate(calc(-50% - 2%), -50%);
+  }
+  to {
+    transform: translate(calc(-50% - 2% - $an-len), calc(-50% - $an-len));
+  }
+}
+
+
+.bg-svg {
+  opacity: 0.05;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  width: 300%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &.bg-svg-1 {
+    animation: background-movement-1 10s ease-in-out alternate infinite;
+  }
+
+  &.bg-svg-2 {
+    animation: background-movement-2 10s ease-in-out alternate infinite;
+  }
 }

@@ -1,23 +1,5 @@
-:root {
-  --ingame-input-bg: #5a5a5a;
-  --ingame-input-color: white;
-  --ingame-miss-btn-bg: gray;
-  --ingame-factor-btn-bg: #9d0000;
-  --ingame-factor-btn-active-bg: #e50000;
-  --ingame-cancel-btn-bg: black;
-  --ingame-cancel-btn-color: #efefef;
-  --ingame-bull-bg: #5a5a5a;
-  --ingame-double-bull-bg: #5a5a5a;
-  --ingame-input-active-bg: gray;
-  --ingame-miss-active-bg: #8d8d8d;
-  --ingame-cancel-active-bg: #1a1a1a;
-  --ingame-bull-active-bg: gray;
-  --ingame-double-bull-active-bg: gray;
-  --ingame-current-player-bg: #00a781;
-  --ingame-empty-score-bg: #61c3ad;
-}
-
 :root[data-theme='dark'] {
+  --ingame-background-color: #393939;
   --ingame-input-bg: #5a5a5a;
   --ingame-input-color: white;
   --ingame-miss-btn-bg: gray;
@@ -64,6 +46,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background-color: var(--ingame-background-color);
 
   .ingame-page-content {
     position: fixed;
@@ -196,7 +179,7 @@
     padding: 2vmin;
     position: fixed;
     bottom: 0;
-    background-color: var(--background-color);
+    background-color: var(--ingame-background-color);
 
     .input-row {
       display: flex;
