@@ -17,7 +17,7 @@ const route_newgame = Vue.component('route_newgame', {
     data() {
         return {
             startsWithDoubleOptions: [
-                {selected: false, label: "Kyllä", value: true, disabled: true},
+                {selected: false, label: "Kyllä", value: true},
                 {selected: false, label: "Ei", value: false}
             ] as RadioOption[],
             startingPointsOptions: [
@@ -41,11 +41,11 @@ const route_newgame = Vue.component('route_newgame', {
     computed: {
         startingPoints(): number {
             let selected = this.startingPointsOptions.find((option) => option.selected);
-            return selected? selected.value : null;
+            return selected ? selected.value : null;
         },
         startsWithDouble(): boolean {
             let selected = this.startsWithDoubleOptions.find((option) => option.selected);
-            return selected? selected.value : null;
+            return selected ? selected.value : null;
         }
     },
     watch: {

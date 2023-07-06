@@ -105,6 +105,7 @@ const route_ingame = Vue.component('route_ingame', {
             scoreStatuses: [],
             isGameOver: currentGame.finished,
             isMenuShown: false,
+            startsWithDouble : gameSettings.startsWithDouble
         };
     },
     created () {
@@ -146,6 +147,21 @@ const route_ingame = Vue.component('route_ingame', {
         restartGame () {
             alert("not implemented yet!");
         },
+        hasPlayerHasDouble(player: Player) {
+            // note: 50 is double 25
+            for (const turn of currentGame.turns) {
+                if (turn.player.name !== player.name) {
+                    continue;
+                }
+
+                for (const dart of turn.darts) {
+                    if (dart.factor === 2 || dart.score === 50) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
         onInput(score) {
             if(this.waitForOk || this.isGameOver) {
                 return;
@@ -156,6 +172,13 @@ const route_ingame = Vue.component('route_ingame', {
             }
 
             vibrate();
+
+            // double-in functionality
+            if(this.startsWithDouble && (!this.double && score !== 50) && !this.hasPlayerHasDouble(this.turn.player)) {
+                score = 0;
+                this.double = false;
+                this.triple = false;
+            }
 
             if (score === 25 && this.double) {
                 score = 50;
