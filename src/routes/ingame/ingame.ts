@@ -105,7 +105,7 @@ const route_ingame = Vue.component('route_ingame', {
             scoreStatuses: [],
             isGameOver: currentGame.finished,
             isMenuShown: false,
-            startsWithDouble : gameSettings.startsWithDouble
+            startsWithDouble : currentGame.gameSettings.startsWithDouble
         };
     },
     created () {
@@ -284,7 +284,7 @@ const route_ingame = Vue.component('route_ingame', {
             }
         },
         getScore(player: Player) {
-            let score = gameSettings.startingPoints;
+            let score = currentGame.gameSettings.startingPoints;
             currentGame.turns.forEach((turn: Turn) => {
                 if (turn.player.id === player.id && !turn.bust) {
                     score -= turn.darts.reduce((acc, dart) => acc + (dart.score * dart.factor), 0);

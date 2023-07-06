@@ -15,6 +15,7 @@ declare interface Game {
     players: Player[],
     turns: Turn[],
     finished: boolean,
+    gameSettings: GameSettings,
 }
 
 function loadCurrentGame(): Game {
@@ -36,7 +37,12 @@ function saveGame() {
 }
 
 function createNewGame(players: Player[]) {
-    currentGame = {players, turns: [{player: players[0], darts: [], bust: false}], finished: false};
+    currentGame = {
+        players,
+        turns: [{player: players[0], darts: [], bust: false}],
+        finished: false,
+        gameSettings: JSON.parse(JSON.stringify(gameSettings))
+    };
     saveGame();
 }
 
