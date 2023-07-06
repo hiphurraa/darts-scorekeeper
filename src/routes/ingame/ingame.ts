@@ -138,7 +138,6 @@ const route_ingame = Vue.component('route_ingame', {
         setScoreStatusHeight() {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
-            console.log({pageHeight, scoreInputHeight});
             this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px` ;
         },
         continueGameDespiteWinner() {
