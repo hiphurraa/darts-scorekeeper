@@ -2,7 +2,8 @@ const route_ingame = Vue.component('route_ingame', {
     template: `<div class="page-ingame" :class="guiState.pageAnimationDirection">
 
         <div class="ingame-page-content" ref="page">
-            <div class="score-status">
+
+            <div class="score-status" ref="scoreStatus">
                 <div class="scoreboard">
                     <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
                         <div class="player-info">
@@ -46,7 +47,7 @@ const route_ingame = Vue.component('route_ingame', {
                 </div>
             </div>
             
-            <div class="score-input">
+            <div class="score-input" ref="scoreInput">
                 <div class="input-row">
                     <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
                         @click="onCancel">PERU
@@ -130,7 +131,16 @@ const route_ingame = Vue.component('route_ingame', {
             }
         },
     },
+    mounted () {
+        this.setScoreStatusHeight();
+    },
     methods: {
+        setScoreStatusHeight() {
+            let pageHeight = this.$refs.page.clientHeight;
+            let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
+            console.log({pageHeight, scoreInputHeight});
+            this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px` ;
+        },
         continueGameDespiteWinner() {
             alert("not implemented yet!");
         },

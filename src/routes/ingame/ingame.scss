@@ -85,14 +85,15 @@
 
   .score-status {
     width: 100%;
-    flex-grow: 1;
-    display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
 
     .scoreboard {
       width: 100%;
+      padding: 30vmin 0;
 
       .player {
         font-size: 5vmin;
@@ -192,6 +193,9 @@
     width: 100%;
     gap: 2vmin;
     padding: 2vmin;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--background-color);
 
     .input-row {
       display: flex;

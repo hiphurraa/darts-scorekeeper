@@ -4,14 +4,17 @@ const route_playerselection = Vue.component('route_playerselection', {
         <NavigationHeader title="Uusi peli (2/2)"></NavigationHeader>
 
         <div class="page-content" :class="guiState.pageAnimationDirection">
-            <div class="player-list input-container">
+            <div class="input-container">
                 <div class="header">Valitse pelaajat (valittuna: {{nSelectedPlayers}})</div>
-                <div v-for="player in gameSettings.players" class="player" 
+                <div class="player-list">
+                    <div v-for="player in gameSettings.players" class="player" 
                         :class="{selected: player.selected}" @click="toggleSelection(player)">
-                    <div class="selection" :class="{selected: player.selected}"></div>
-                    <div class="name">{{ player.name }}</div>
-                    <div class="spacer"></div>
+                        <div class="selection" :class="{selected: player.selected}"></div>
+                        <div class="name">{{ player.name }}</div>
+                        <div class="spacer"></div>
+                    </div>
                 </div>
+                
             </div>
         
             <div @click="toPage('/addplayer', 'from-top')" class="button-s secondary full-width">+ Luo uusi pelaaja</div>
