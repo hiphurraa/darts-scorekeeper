@@ -10,8 +10,7 @@ Vue.component('NavigationHeader', {
     
     <header>
         <div class="previous-page" @click="onPrevious">
-                <img v-if="theme === 'dark'" src="images/back-dark.png"/>
-                <img v-else src="images/back-light.png"/>
+                <
             </router-link>
         </div>
         <div class="title">{{ title }}</div>    
