@@ -97,6 +97,7 @@
 
       .player {
         font-size: 5vmin;
+        transition: background-color 0.3s;
 
         &.current {
           background-color: var(--ingame-current-player-bg);
