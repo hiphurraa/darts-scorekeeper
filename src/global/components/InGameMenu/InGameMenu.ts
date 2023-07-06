@@ -26,6 +26,7 @@ Vue.component("InGameMenu", {
     },
     methods: {
         toggleMenu() {
+            vibrate();
             this.isMenuShown = !this.isMenuShown;
         },
         toPage(route, animation) {
