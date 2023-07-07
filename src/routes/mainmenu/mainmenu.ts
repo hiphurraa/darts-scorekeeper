@@ -7,13 +7,13 @@ let route_mainmenu = Vue.component('route_mainmenu', {
         </div>
         
         <div class="buttons-wrapper">
-            <div class="button-l default" @click="toPage('/newgame')">Uusi peli</div>
-            <div class="button-l mt4" @click="toPage('/settings')">Asetukset</div>
+            <button class="button-l default" @click="toPage('/newgame')">Uusi peli</button>
+            <button class="button-l mt4" @click="toPage('/settings')">Asetukset</button>
         </div>
         
         <div v-if="showContinueGamePrompt" class="continue-game-prompt">
                 <div class="prompt-text">Jatka keskeytettyä peliä?</div>
-                <div class="button-s default" @click="toPage('ingame', 'from-bottom')">Jatka</div>
+                <button class="button-s default" @click="toPage('ingame', 'from-bottom')">Jatka</button>
         </div>
     </div>`,
     mixins: [pageMixin],

@@ -6,7 +6,9 @@ const route_settings = Vue.component('route_settings', {
         <div class="page-content" :class="guiState.pageAnimationDirection">
             <CustomRadio title="Teema" :options="themeOptions" @selected="(o) => {themeOptions = o}"></CustomRadio>
             <CustomRadio title="Kieli" :options="languageOptions" @selected="(o) => {languageOptions = o}"></CustomRadio>
-            <div class="button-s mt5" @click="clearAll">Resetoi sovellus</div>
+            <button class="button-s secondary mt5" @click="clearAll">
+                Resetoi sovellus {{ resetCounter > 0? ("(" + resetCounter + "/3)") : "" }}
+            </button>
         </div>
     </div>`,
     mixins: [pageMixin],
@@ -19,7 +21,8 @@ const route_settings = Vue.component('route_settings', {
             languageOptions: [
                 {selected: false, label: "Suomi", value: 'fi'},
                 {selected: false, label: "Englanti", value: 'en', disabled: true},
-            ] as RadioOption[]
+            ] as RadioOption[],
+            resetCounter: 0,
         }
     },
     mounted() {
@@ -60,6 +63,13 @@ const route_settings = Vue.component('route_settings', {
     },
     methods: {
         clearAll() {
+            if (this.resetCounter < 3) {
+                vibrate();
+                this.resetCounter++;
+                return;
+            } else {
+                this.resetCounter = 0;
+            }
             resetDefaultApplicationSettings();
             resetDefaultCurrentGame();
             resetDefaultGameSettings();

@@ -9,7 +9,7 @@ const route_newgame = Vue.component('route_newgame', {
             <CustomRadio title="Alkaa tuplalla" :options="startsWithDoubleOptions" 
                 @selected="(o) => {startsWithDoubleOptions = o}">
             </CustomRadio>
-            <div class="button-l default continue" @click="toPage('/playerselection')">Jatka</div>
+            <button class="button-l default full-width continue" @click="toPage('/playerselection')">Jatka</button>
     </div>
     
     </div>`,

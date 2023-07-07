@@ -19,6 +19,7 @@
     padding: $sc4;
     font-size: $sc5;
     border-radius: $sc2;
+    transition: 0.1s;
 
     &.selected {
       box-shadow: 0 0 0 $sc1 inset var(--selected-color);

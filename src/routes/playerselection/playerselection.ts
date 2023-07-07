@@ -17,9 +17,9 @@ const route_playerselection = Vue.component('route_playerselection', {
                 
             </div>
         
-            <div @click="toPage('/addplayer', 'from-top')" class="button-s secondary full-width">+ Luo uusi pelaaja</div>
+            <button @click="toPage('/addplayer', 'from-top')" class="button-s secondary full-width">+ Luo uusi pelaaja</button>
             
-            <div class="button-l continue default" @click="startGame" :class="{disabled: !isGameSettingsValid}">Aloita peli</div>
+            <button class="button-l continue full-width default" @click="startGame" :class="{disabled: !isGameSettingsValid}">Aloita peli</button>
         </div>
     </div>`,
     mixins: [pageMixin],

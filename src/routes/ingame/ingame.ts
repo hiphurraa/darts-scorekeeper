@@ -41,53 +41,53 @@ const route_ingame = Vue.component('route_ingame', {
                 <div v-if="isGameOver" class="game-over-notification">
                     <div>Peli on päättynyt!</div>
                     <div>Pelaaja {{ turn.player.name }} voitti pelin!</div>
-                    <div class="button-s default mt4" @click="toPage('/', 'from-top')">Siirry päävalikkoon</div>
-                    <div class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</div>
-                    <div class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</div>
+                    <button class="button-s default mt4" @click="toPage('/', 'from-top')">Siirry päävalikkoon</button>
+                    <button class="button-s default mt4 disabled" @click="restartGame">Aloita uusi peli samoilla säännöillä ja pelaajilla</button>
+                    <button class="button-s default mt4 disabled" @click="continueGameDespiteWinner">Jatka peli loppuun lopuilla pelaajilla</button>
                 </div>
             </div>
             
             <div class="score-input" ref="scoreInput">
                 <div class="input-row">
-                    <div class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
+                    <button class="input one4th cancel" :class="{disabled: (game.turns.length === 1 && !turn.darts.length)}"
                         @click="onCancel">PERU
-                    </div>
-                    <div class="input one4th factor" :class="{active: double, disabled: waitForOk}" @click="on2x">2x</div>
-                    <div class="input one4th factor" :class="{active: triple, disabled: waitForOk}" @click="on3x">3x</div>
-                    <div class="input one4th confirm" :class="{disabled: !waitForOk || isGameOver}" @click="onOk">OK</div>
+                    </button>
+                    <button class="input one4th factor" :class="{active: double, disabled: waitForOk}" @click="on2x">2x</button>
+                    <button class="input one4th factor" :class="{active: triple, disabled: waitForOk}" @click="on3x">3x</button>
+                    <button class="input one4th confirm" :class="{disabled: !waitForOk || isGameOver}" @click="onOk">OK</button>
                 </div>
                 <div class="input-row">
-                    <div class="input digit one5th" @click="onInput(1)" :class="{disabled: waitForOk}">1</div>
-                    <div class="input digit one5th" @click="onInput(2)" :class="{disabled: waitForOk}">2</div>
-                    <div class="input digit one5th" @click="onInput(3)" :class="{disabled: waitForOk}">3</div>
-                    <div class="input digit one5th" @click="onInput(4)" :class="{disabled: waitForOk}">4</div>
-                    <div class="input digit one5th" @click="onInput(5)" :class="{disabled: waitForOk}">5</div>
+                    <button class="input digit one5th" @click="onInput(1)" :class="{disabled: waitForOk}">1</button>
+                    <button class="input digit one5th" @click="onInput(2)" :class="{disabled: waitForOk}">2</button>
+                    <button class="input digit one5th" @click="onInput(3)" :class="{disabled: waitForOk}">3</button>
+                    <button class="input digit one5th" @click="onInput(4)" :class="{disabled: waitForOk}">4</button>
+                    <button class="input digit one5th" @click="onInput(5)" :class="{disabled: waitForOk}">5</button>
                 </div>
                 <div class="input-row">
-                    <div class="input digit one5th" @click="onInput(6)" :class="{disabled: waitForOk}">6</div>
-                    <div class="input digit one5th" @click="onInput(7)" :class="{disabled: waitForOk}">7</div>
-                    <div class="input digit one5th" @click="onInput(8)" :class="{disabled: waitForOk}">8</div>
-                    <div class="input digit one5th" @click="onInput(9)" :class="{disabled: waitForOk}">9</div>
-                    <div class="input digit one5th" @click="onInput(10)" :class="{disabled: waitForOk}">10</div>
+                    <button class="input digit one5th" @click="onInput(6)" :class="{disabled: waitForOk}">6</button>
+                    <button class="input digit one5th" @click="onInput(7)" :class="{disabled: waitForOk}">7</button>
+                    <button class="input digit one5th" @click="onInput(8)" :class="{disabled: waitForOk}">8</button>
+                    <button class="input digit one5th" @click="onInput(9)" :class="{disabled: waitForOk}">9</button>
+                    <button class="input digit one5th" @click="onInput(10)" :class="{disabled: waitForOk}">10</button>
                 </div>
                 <div class="input-row">
-                    <div class="input digit one5th" @click="onInput(11)" :class="{disabled: waitForOk}">11</div>
-                    <div class="input digit one5th" @click="onInput(12)" :class="{disabled: waitForOk}">12</div>
-                    <div class="input digit one5th" @click="onInput(13)" :class="{disabled: waitForOk}">13</div>
-                    <div class="input digit one5th" @click="onInput(14)" :class="{disabled: waitForOk}">14</div>
-                    <div class="input digit one5th" @click="onInput(15)" :class="{disabled: waitForOk}">15</div>
+                    <button class="input digit one5th" @click="onInput(11)" :class="{disabled: waitForOk}">11</button>
+                    <button class="input digit one5th" @click="onInput(12)" :class="{disabled: waitForOk}">12</button>
+                    <button class="input digit one5th" @click="onInput(13)" :class="{disabled: waitForOk}">13</button>
+                    <button class="input digit one5th" @click="onInput(14)" :class="{disabled: waitForOk}">14</button>
+                    <button class="input digit one5th" @click="onInput(15)" :class="{disabled: waitForOk}">15</button>
                 </div>
                 <div class="input-row">
-                    <div class="input digit one5th" @click="onInput(16)" :class="{disabled: waitForOk}">16</div>
-                    <div class="input digit one5th" @click="onInput(17)" :class="{disabled: waitForOk}">17</div>
-                    <div class="input digit one5th" @click="onInput(18)" :class="{disabled: waitForOk}">18</div>
-                    <div class="input digit one5th" @click="onInput(19)" :class="{disabled: waitForOk}">19</div>
-                    <div class="input digit one5th" @click="onInput(20)" :class="{disabled: waitForOk}">20</div>
+                    <button class="input digit one5th" @click="onInput(16)" :class="{disabled: waitForOk}">16</button>
+                    <button class="input digit one5th" @click="onInput(17)" :class="{disabled: waitForOk}">17</button>
+                    <button class="input digit one5th" @click="onInput(18)" :class="{disabled: waitForOk}">18</button>
+                    <button class="input digit one5th" @click="onInput(19)" :class="{disabled: waitForOk}">19</button>
+                    <button class="input digit one5th" @click="onInput(20)" :class="{disabled: waitForOk}">20</button>
                 </div>
                 <div class="input-row">
-                    <div class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</div>
-                    <div class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk || triple}">25</div>
-                    <div class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk || double || triple}">50</div>
+                    <button class="input digit one3th miss" @click="onInput(0)" :class="{disabled: waitForOk}">0</button>
+                    <button class="input digit one3th bull" @click="onInput(25)" :class="{disabled: waitForOk || triple}">25</button>
+                    <button class="input digit one3th double-bull" @click="onInput(50)" :class="{disabled: waitForOk || double || triple}">50</button>
                 </div>
             </div>
         </div>
@@ -144,7 +144,6 @@ const route_ingame = Vue.component('route_ingame', {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
             this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px` ;
-            console.log("setScoreStatusHeight");
         },
         continueGameDespiteWinner() {
             alert("not implemented yet!");

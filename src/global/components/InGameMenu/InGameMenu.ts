@@ -9,8 +9,8 @@ Vue.component("InGameMenu", {
         </div>
         
         <div v-if="isMenuShown" class="menu">
-            <div class="button-m secondary" @click="toPage('/', 'from-top')">Päävalikko</div>
-            <div class="button-m secondary mt5" @click="toPage('/settings', 'from-right')">Asetukset</div>
+            <button class="button-m secondary" @click="toPage('/', 'from-top')">Päävalikko</button>
+            <button class="button-m secondary mt5" @click="toPage('/settings', 'from-right')">Asetukset</button>
         </div>
         
     </div>`,
