@@ -1,0 +1,27 @@
+@import 'scaling';
+
+:root[data-theme='dark'] {
+  --background-color: #323232;
+  --container-bg: #5050507a;
+  --navbar-color: #2c2c2c;
+  --shadow-color: #000000a6;
+  --default-btn-bg: #00a781;
+  --selected-bg-color: #25695a;
+  --selected-color: #00a983;
+  --text-color: white;
+  --button-bg: #000000;
+  --button-color: #ffffff;
+  --option-bg: black;
+  --disabled-btn-bg: #202020;
+  --disabled-btn-color: #525252;
+  --selection-bg-color: #494949;
+  --border-color: #494949;
+  --default-btn-color: #ffffff;
+  --secondary-btn-bg: #484848;
+  --secondary-btn-color: #ffffff;
+  --error-text-color: #00f5be;
+  --attention-text-color: #00f5be;
+  --back-button-bg: #404040;
+}
+
+$nav-height: $sc20;

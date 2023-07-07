@@ -10,8 +10,7 @@ Vue.component('NavigationHeader', {
     
     <header>
         <div class="previous-page" @click="onPrevious">
-                <
-            </router-link>
+             <
         </div>
         <div class="title">{{ title }}</div>    
     </header>

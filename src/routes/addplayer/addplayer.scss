@@ -1,12 +1,14 @@
+@import '../../global/styles/scaling';
+
 .page-addplayer {
 
   .add-player {
-    margin-top: 5vmin;
+    margin-top: $sc5;
   }
 
   .validation-error {
-    font-size: 5vmin;
-    margin-top: 3vmin;
+    font-size: $sc5;
+    margin-top: $sc3;
     text-align: center;
     color: var(--error-text-color);
   }

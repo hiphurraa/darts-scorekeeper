@@ -1,32 +1,8 @@
+@import 'scaling';
+
 :root {
     touch-action: pan-x pan-y;
     height: 100%
-}
-
-:root[data-theme='dark'] {
-  --background-color: #323232;
-  --container-bg: #5050507a;
-  --navbar-color: #2c2c2c;
-  --shadow-color: #000000a6;
-  --default-btn-bg: #00a781;
-  --selected-bg-color: #25695a;
-  --selected-color: #00a983;
-  --text-color: white;
-  --button-bg: #000000;
-  --button-color: #ffffff;
-  --option-bg: black;
-  --disabled-btn-bg: #202020;
-  --disabled-btn-color: #525252;
-  --selection-bg-color: #494949;
-  --border-color: #494949;
-  --default-btn-color: #ffffff;
-  --secondary-btn-bg: #484848;
-  --secondary-btn-color: #ffffff;
-  --error-text-color: #00f5be;
-  --nav-height: 20vmin;
-  --select-border-color: black;
-  --attention-text-color: #00f5be;
-  --back-button-bg: #404040;
 }
 
 html {
@@ -54,8 +30,8 @@ body {
   background-color: var(--button-bg);
   color: var(--button-color);
   text-decoration: none;
-  padding: 3vmin 5vmin;
-  border-radius: 2vmin;
+  padding: $sc3 $sc5;
+  border-radius: $sc2;
   text-align: center;
 
   * {
@@ -84,16 +60,16 @@ body {
 }
 
 .button-s {
-  font-size: 4vmin;
-  padding: 2vmin 3vmin;
+  font-size: $sc4;
+  padding: $sc2 $sc3;
 }
 
 .button-m {
-  font-size: 5vmin;
+  font-size: $sc5;
 }
 
 .button-l {
-  font-size: 7vmin;
+  font-size: $sc7;
 }
 
 .full-width {
@@ -106,97 +82,57 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: var(--container-bg);
-  padding: 3vmin 0;
-  margin-top: 3vmin;
-  border-radius: 2vmin;
+  padding: $sc3 0;
+  margin-top: $sc3;
+  border-radius: $sc2;
 
   .header {
-    font-size: 5vmin;
-    margin-bottom: 3vmin;
+    font-size: $sc5;
+    margin-bottom: $sc3;
   }
 }
 
 .text-input {
-  width: calc(100% - 6vmin);
-  border-radius: 2vmin;
+  width: calc(100% - $sc6);
+  border-radius: $sc2;
   border: none;
-  font-size: 5vmin;
-  padding: 1vmin;
+  font-size: $sc5;
+  padding: $sc1;
   text-align: center;
 }
 
 .page-content {
-  padding: 2vmin;
+  padding: $sc2;
   width: 100%;
 }
 
 .mb1 {
-  margin-bottom: 1vmin;
+  margin-bottom: $sc1;
 }
 .mb2 {
-  margin-bottom: 2vmin;
+  margin-bottom: $sc2;
 }
 .mb3 {
-  margin-bottom: 3vmin;
+  margin-bottom: $sc3;
 }
 .mb4 {
-  margin-bottom: 4vmin;
+  margin-bottom: $sc4;
 }
 .mb5 {
-  margin-bottom: 5vmin;
+  margin-bottom: $sc5;
 }
 .mt1 {
-  margin-top: 1vmin;
+  margin-top: $sc1;
 }
 .mt2 {
-  margin-top: 2vmin;
+  margin-top: $sc2;
 }
 .mt3 {
-  margin-top: 3vmin;
+  margin-top: $sc3;
 }
 .mt4 {
-  margin-top: 4vmin;
+  margin-top: $sc4;
 }
 .mt5 {
-  margin-top: 5vmin;
-}
-
-
-$an-len: 5vmin;
-
-@keyframes background-movement-1 {
-  from {
-    transform: translate(calc(-50% - $an-len), calc(-50% - $an-len));
-  }
-  to {
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes background-movement-2 {
-  from {
-    transform: translate(calc(-50% - 2%), -50%);
-  }
-  to {
-    transform: translate(calc(-50% - 2% - $an-len), calc(-50% - $an-len));
-  }
-}
-
-
-.bg-svg {
-  opacity: 0.05;
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  width: 300%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  &.bg-svg-1 {
-    animation: background-movement-1 10s ease-in-out alternate infinite;
-  }
-
-  &.bg-svg-2 {
-    animation: background-movement-2 10s ease-in-out alternate infinite;
-  }
+  margin-top: $sc5;
 }

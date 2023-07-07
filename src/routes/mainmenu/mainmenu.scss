@@ -1,3 +1,5 @@
+@import '../../global/styles/scaling';
+
 .page-mainmenu {
   display: flex;
   flex-direction: column;
@@ -10,14 +12,14 @@
   right: 0;
 
   .header {
-    font-size: 10vmin;
+    font-size: $sc10;
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 10vmin;
+    margin-bottom: $sc10;
 
     span:nth-child(2) {
-      font-size: 7vmin;
+      font-size: $sc7;
     }
   }
 
@@ -28,11 +30,11 @@
 
   @keyframes slide-in-from-bottom {
     0% {
-      transform: translateY(calc(6vmin + 100%));
+      transform: translateY(calc($sc6 + 100%));
       opacity: 0;
     }
     50% {
-      transform: translateY(calc(6vmin + 100%));
+      transform: translateY(calc($sc6 + 100%));
       opacity: 0;
     }
     100% {
@@ -43,11 +45,11 @@
 
   .continue-game-prompt {
     position: absolute;
-    left: 3vmin;
-    right: 3vmin;
-    bottom: 3vmin;
-    border-radius: 2vmin;
-    padding: 5vmin;
+    left: $sc3;
+    right: $sc3;
+    bottom: $sc3;
+    border-radius: $sc2;
+    padding: $sc5;
     display: flex;
     justify-content: space-around;
     background-color: #161616;
@@ -56,8 +58,8 @@
 
     .prompt-text {
       color: var(--text-color);
-      padding-right: 3vmin;
-      font-size: 4vmin;
+      padding-right: $sc3;
+      font-size: $sc4;
     }
   }
 }

@@ -98,6 +98,7 @@ const route_ingame = Vue.component('route_ingame', {
     mixins: [pageMixin],
     data() {
         return {
+            resizingEvent: null,
             game: currentGame,
             turn: currentGame.turns[currentGame.turns.length - 1] as Turn,
             double: false,
@@ -134,12 +135,16 @@ const route_ingame = Vue.component('route_ingame', {
     },
     mounted () {
         this.setScoreStatusHeight();
+        // TODO: remove somehow when page exited
+        //window.addEventListener('resize', this.setScoreStatusHeight);
     },
+
     methods: {
         setScoreStatusHeight() {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
             this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px` ;
+            console.log("setScoreStatusHeight");
         },
         continueGameDespiteWinner() {
             alert("not implemented yet!");

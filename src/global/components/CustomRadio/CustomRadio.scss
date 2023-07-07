@@ -1,25 +1,27 @@
+@import '../../styles/scaling';
+
 .component-custom-radio {
   .title {
-    font-size: 5vmin;
-    margin-bottom: 3vmin;
+    font-size: $sc5;
+    margin-bottom: $sc3;
   }
 
   .options {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 3vmin;
+    gap: $sc3;
   }
 
   .option {
     background-color: var(--button-bg);
     color: var(--button-color);
-    padding: 4vmin;
-    font-size: 5vmin;
-    border-radius: 2vmin;
+    padding: $sc4;
+    font-size: $sc5;
+    border-radius: $sc2;
 
     &.selected {
-      box-shadow: 0 0 0 1vmin inset var(--selected-color);
+      box-shadow: 0 0 0 $sc1 inset var(--selected-color);
     }
 
     &.disabled {

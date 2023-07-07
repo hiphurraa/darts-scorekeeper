@@ -1,3 +1,5 @@
+@import '../../global/styles/scaling';
+
 :root[data-theme='dark'] {
   --ingame-background-color: var(--background-color);
   --ingame-input-bg: #5a5a5a;
@@ -76,25 +78,25 @@
 
     .scoreboard {
       width: 100%;
-      padding: 30vmin 0;
+      padding: $sc30 0;
 
       .player {
-        font-size: 5vmin;
-        transition: 0.5s;
+        font-size: $sc5;
+        transition: background-color 0.5s;
 
         &.current {
           background-color: var(--ingame-current-player-bg);
-          font-size: 7vmin;
+          font-size: $sc7;
 
           .player-order-number {
-            font-size: 4vmin !important;
+            font-size: $sc4 !important;
           }
         }
 
         .player-info {
           display: flex;
           align-items: center;
-          padding: 2vmin 2vmin 2vmin 6vmin;
+          padding: $sc2 $sc2 $sc2 $sc6;
           position: relative;
 
           & > div {
@@ -110,11 +112,11 @@
           }
 
           .player-order-number {
-            font-size: 3vmin;
+            font-size: $sc3;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 2vmin;
+            left: $sc2;
             color: #b5b5b5;
           }
         }
@@ -122,15 +124,15 @@
         .turn-info {
           display: flex;
           justify-content: center;
-          padding: 3vmin 0 5vmin 0;
+          padding: $sc3 0 $sc5 0;
 
           .dart {
             background-color: var(--ingame-score-bg);
             border-radius: 100%;
-            height: 13vmin;
-            width: 13vmin;
+            height: $sc13;
+            width: $sc13;
             color: black;
-            font-size: 5vmin;
+            font-size: $sc5;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -146,11 +148,11 @@
             }
 
             &.active {
-              box-shadow: 0 0 0 1vmin var(--selected-color);
+              box-shadow: 0 0 0 $sc1 var(--selected-color);
             }
 
             &:not(:first-child) {
-              margin-left: 10vmin;
+              margin-left: $sc10;
             }
 
             .bust {
@@ -162,7 +164,7 @@
               transform: translateY(-83%);
               display: flex;
               justify-content: center;
-              font-size: 5vmin;
+              font-size: $sc5;
               font-weight: bold;
             }
           }
@@ -175,8 +177,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 2vmin;
-    padding: 2vmin;
+    gap: $sc2;
+    padding: $sc2;
     position: fixed;
     bottom: 0;
     background-color: var(--ingame-background-color);
@@ -184,16 +186,16 @@
     .input-row {
       display: flex;
       width: 100%;
-      gap: 2vmin;
+      gap: $sc2;
 
       .input {
         flex-grow: 1;
         background-color: var(--ingame-input-bg);
         color: var(--ingame-input-color);
         text-align: center;
-        padding: 3vmin 0;
-        border-radius: 2vmin;
-        font-size: 5vmin;
+        padding: $sc3 0;
+        border-radius: $sc2;
+        font-size: $sc5;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -220,7 +222,7 @@
         }
 
         &.cancel {
-          font-size: 4vmin;
+          font-size: $sc4;
           background-color: var(--ingame-cancel-btn-bg);
           color: var(--ingame-cancel-btn-color);
 
@@ -281,7 +283,7 @@
     right: 0;
     background-color: black;
     color: white;
-    padding: 5vmin;
-    font-size: 5vmin;
+    padding: $sc5;
+    font-size: $sc5;
   }
 }

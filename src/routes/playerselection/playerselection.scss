@@ -1,3 +1,5 @@
+@import '../../global/styles/scaling';
+
 .page-playerselection {
   display: flex;
   flex-direction: column;
@@ -17,8 +19,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 6vmin;
-      padding: 3vmin;
+      font-size: $sc6;
+      padding: $sc3;
 
       &.selected {
         background-color: var(--selected-bg-color);
@@ -26,9 +28,9 @@
 
 
       .selection {
-        width: 7vmin;
-        height: 7vmin;
-        border-radius: 2vmin;
+        width: $sc7;
+        height: $sc7;
+        border-radius: $sc2;
         background-color: var(--selection-bg-color);
 
         &.selected {
@@ -37,12 +39,12 @@
       }
 
       .spacer {
-        width: 7vmin;
+        width: $sc7;
       }
     }
   }
 
   .continue {
-    margin-top: 5vmin;
+    margin-top: $sc5;
   }
 }

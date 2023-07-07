@@ -1,0 +1,49 @@
+/* Desktop */
+:root {
+  --sc: 0.5;
+}
+
+/* Tablet */
+@media (max-aspect-ratio: 1/1) {
+  :root {
+    --sc: 0.7;
+  }
+}
+
+/* Mobile */
+@media (max-aspect-ratio: 3/5) {
+  :root {
+    --sc: 1;
+  }
+}
+
+$sc1: calc(1vmin * var(--sc));
+$sc2: calc(2vmin * var(--sc));
+$sc3: calc(3vmin * var(--sc));
+$sc4: calc(4vmin * var(--sc));
+$sc5: calc(5vmin * var(--sc));
+$sc6: calc(6vmin * var(--sc));
+$sc7: calc(7vmin * var(--sc));
+$sc8: calc(8vmin * var(--sc));
+$sc9: calc(9vmin * var(--sc));
+$sc10: calc(10vmin * var(--sc));
+$sc11: calc(11vmin * var(--sc));
+$sc12: calc(12vmin * var(--sc));
+$sc13: calc(13vmin * var(--sc));
+$sc14: calc(14vmin * var(--sc));
+$sc15: calc(15vmin * var(--sc));
+$sc16: calc(16vmin * var(--sc));
+$sc17: calc(17vmin * var(--sc));
+$sc18: calc(18vmin * var(--sc));
+$sc19: calc(19vmin * var(--sc));
+$sc20: calc(20vmin * var(--sc));
+$sc21: calc(21vmin * var(--sc));
+$sc22: calc(22vmin * var(--sc));
+$sc23: calc(23vmin * var(--sc));
+$sc24: calc(24vmin * var(--sc));
+$sc25: calc(25vmin * var(--sc));
+$sc26: calc(26vmin * var(--sc));
+$sc27: calc(27vmin * var(--sc));
+$sc28: calc(28vmin * var(--sc));
+$sc29: calc(29vmin * var(--sc));
+$sc30: calc(30vmin * var(--sc));

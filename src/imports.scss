@@ -1,6 +1,8 @@
+@use 'global/styles/variables';
 @use 'global/styles/styles';
 @use 'global/styles/page-transitions';
 @use 'global/styles/background-image';
+@use 'global/styles/scaling';
 
 /* Components */
 @use 'global/components/NavigationHeader/NavigationHeader';
