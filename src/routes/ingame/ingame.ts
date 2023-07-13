@@ -106,10 +106,10 @@ const route_ingame = Vue.component('route_ingame', {
             scoreStatuses: [],
             isGameOver: currentGame.finished,
             isMenuShown: false,
-            startsWithDouble : currentGame.gameSettings.startsWithDouble
+            startsWithDouble: currentGame.gameSettings.startsWithDouble
         };
     },
-    created () {
+    created() {
         if (!currentGame) {
             this.toPage('/', 'from-top');
         }
@@ -133,22 +133,24 @@ const route_ingame = Vue.component('route_ingame', {
             }
         },
     },
-    mounted () {
+    mounted() {
         this.setScoreStatusHeight();
-        // TODO: remove somehow when page exited
-        //window.addEventListener('resize', this.setScoreStatusHeight);
+        window.addEventListener('resize', this.setScoreStatusHeight);
     },
-
+    beforeRouteLeave (to, from, next) {
+        window.removeEventListener('resize', this.setScoreStatusHeight);
+        next();
+    },
     methods: {
         setScoreStatusHeight() {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
-            this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px` ;
+            this.$refs.scoreStatus.style.height = `${pageHeight - scoreInputHeight}px`;
         },
         continueGameDespiteWinner() {
             alert("not implemented yet!");
         },
-        restartGame () {
+        restartGame() {
             alert("not implemented yet!");
         },
         hasPlayerHasDouble(player: Player) {
@@ -167,18 +169,18 @@ const route_ingame = Vue.component('route_ingame', {
             return false;
         },
         onInput(score) {
-            if(this.waitForOk || this.isGameOver) {
+            if (this.waitForOk || this.isGameOver) {
                 return;
             } else if (this.triple && score === 25) {
                 return;
-            }  else if ((this.double || this.triple) && score === 50) {
+            } else if ((this.double || this.triple) && score === 50) {
                 return;
             }
 
             vibrate();
 
             // double-in functionality
-            if(this.startsWithDouble && (!this.double && score !== 50) && !this.hasPlayerHasDouble(this.turn.player)) {
+            if (this.startsWithDouble && (!this.double && score !== 50) && !this.hasPlayerHasDouble(this.turn.player)) {
                 score = 0;
                 this.double = false;
                 this.triple = false;
@@ -234,7 +236,7 @@ const route_ingame = Vue.component('route_ingame', {
             this.triple = !this.triple;
         },
         onCancel() {
-            if(!(currentGame.turns.length > 1) && !(this.turn.darts.length)) {
+            if (!(currentGame.turns.length > 1) && !(this.turn.darts.length)) {
                 return;
             }
 
@@ -250,14 +252,14 @@ const route_ingame = Vue.component('route_ingame', {
                 this.turn.darts.pop();
             } else if (this.turn.darts.length) {
                 this.turn.darts.pop();
-            } else if (currentGame.turns.length > 1){
+            } else if (currentGame.turns.length > 1) {
                 currentGame.turns.pop();
             }
 
             this.turn = currentGame.turns[currentGame.turns.length - 1]
             saveGame();
         },
-        onOk () {
+        onOk() {
             if (!this.waitForOk || this.isGameOver) {
                 return;
             }
