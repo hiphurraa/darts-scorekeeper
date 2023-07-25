@@ -82,7 +82,7 @@
 
       .player {
         font-size: $sc5;
-        transition: background-color 0.5s;
+        transition: background-color 0.3s;
 
         &.current {
           background-color: var(--ingame-current-player-bg);

@@ -136,19 +136,19 @@ const route_ingame = Vue.component('route_ingame', {
     mounted() {
         this.setScoreStatusHeight();
         window.addEventListener('resize', this.setScoreStatusHeight);
+        this.scrollToCurrentPlayer('auto');
     },
     beforeRouteLeave (to, from, next) {
         window.removeEventListener('resize', this.setScoreStatusHeight);
         next();
     },
     methods: {
-        scrollToCurrentPlayer() {
+        scrollToCurrentPlayer(behavior?) {
             this.$refs.scoreboard.querySelector('.current').scrollIntoView({
                 block: 'center',
-                behavior: 'smooth'
+                behavior: behavior? behavior : 'smooth'
             });
         },
-
         setScoreStatusHeight() {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
