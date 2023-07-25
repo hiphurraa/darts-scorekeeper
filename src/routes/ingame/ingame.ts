@@ -4,7 +4,7 @@ const route_ingame = Vue.component('route_ingame', {
         <div class="ingame-page-content" ref="page">
 
             <div class="score-status" ref="scoreStatus">
-                <div class="scoreboard">
+                <div class="scoreboard" ref="scoreboard">
                     <div v-for="(player, i) in game.players" class="player" :class="{current: turn.player.id === player.id}">   
                         <div class="player-info">
                             <span class="player-order-number">{{ i+1 }}.</span>
@@ -142,6 +142,13 @@ const route_ingame = Vue.component('route_ingame', {
         next();
     },
     methods: {
+        scrollToCurrentPlayer() {
+            this.$refs.scoreboard.querySelector('.current').scrollIntoView({
+                block: 'center',
+                behavior: 'smooth'
+            });
+        },
+
         setScoreStatusHeight() {
             let pageHeight = this.$refs.page.clientHeight;
             let scoreInputHeight = this.$refs.scoreInput.offsetHeight;
@@ -216,6 +223,7 @@ const route_ingame = Vue.component('route_ingame', {
             }
 
             saveGame();
+            this.scrollToCurrentPlayer();
         },
         on2x() {
             if (this.waitForOk || this.isGameOver) {
@@ -225,6 +233,7 @@ const route_ingame = Vue.component('route_ingame', {
             vibrate();
             this.triple = false;
             this.double = !this.double;
+            this.scrollToCurrentPlayer();
         },
         on3x() {
             if (this.waitForOk || this.isGameOver) {
@@ -234,8 +243,11 @@ const route_ingame = Vue.component('route_ingame', {
             vibrate();
             this.double = false;
             this.triple = !this.triple;
+            this.scrollToCurrentPlayer();
         },
         onCancel() {
+            const me = this;
+
             if (!(currentGame.turns.length > 1) && !(this.turn.darts.length)) {
                 return;
             }
@@ -258,8 +270,11 @@ const route_ingame = Vue.component('route_ingame', {
 
             this.turn = currentGame.turns[currentGame.turns.length - 1]
             saveGame();
+            setTimeout(me.scrollToCurrentPlayer, 20);
         },
         onOk() {
+            const me = this;
+
             if (!this.waitForOk || this.isGameOver) {
                 return;
             }
@@ -273,6 +288,7 @@ const route_ingame = Vue.component('route_ingame', {
 
             newTurn();
             this.turn = currentGame.turns[currentGame.turns.length - 1];
+            setTimeout(me.scrollToCurrentPlayer, 20);
         },
         getFactor(dartIndex: number) {
             let dart: Dart = this.turn.darts[dartIndex];
