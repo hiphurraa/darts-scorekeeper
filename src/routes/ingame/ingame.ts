@@ -13,24 +13,24 @@ const route_ingame = Vue.component('route_ingame', {
                         </div>
                         <div v-if="turn.player.id === player.id" class="turn-info">
                             <div class="dart" :class="{empty: !turn.darts[0], active: !waitForOk && !turn.darts[0]}">
-                                <div v-if="turn.darts[0]">
+                                <div>
                                     <span class="factor">{{ getFactor(0) }}</span>
-                                    <span class="score">{{ turn.darts[0].score }}</span>
+                                    <span class="score" v-if="turn.darts[0]">{{ turn.darts[0].score }}</span>
                                     <span v-if="turn.darts.length === 1 && turn.bust" class="bust">BUST</span>
                                 </div>
                             </div>
                             <div class="dart" :class="{empty: !turn.darts[1], active: !waitForOk && !!turn.darts[0] && !turn.darts[1]}">
-                                <div v-if="turn.darts[1]">
+                                <div v-if="turn.darts[0]">
                                     <span class="factor">{{ getFactor(1) }}</span>
-                                    <span class="score">{{ turn.darts[1].score }}</span>
+                                    <span class="score" v-if="turn.darts[1]">{{ turn.darts[1].score }}</span>
                                     <span v-if="turn.darts.length === 2 && turn.bust" class="bust">BUST</span>
                                 </div>
                             </div>
                             <div class="dart" 
                             :class="{empty: !turn.darts[2], active: !waitForOk && !!turn.darts[0] && !!turn.darts[1] && !turn.darts[2]}">
-                                <div v-if="turn.darts[2]">
+                                <div v-if="turn.darts[1]">
                                     <span class="factor">{{ getFactor(2) }}</span>
-                                    <span class="score">{{ turn.darts[2].score }}</span>
+                                    <span class="score" v-if="turn.darts[2]">{{ turn.darts[2].score }}</span>
                                     <span v-if="turn.darts.length === 3 && turn.bust" class="bust">BUST</span>
                                 </div>
                             </div>
@@ -294,9 +294,9 @@ const route_ingame = Vue.component('route_ingame', {
             let dart: Dart = this.turn.darts[dartIndex];
 
             if (!dart && this.double) {
-                return "D..";
+                return "D...";
             } else if (!dart && this.triple) {
-                return "T..";
+                return "T...";
             } else if (!dart || dart.factor === 1) {
                 return "";
             } else if (dart.factor === 2) {
