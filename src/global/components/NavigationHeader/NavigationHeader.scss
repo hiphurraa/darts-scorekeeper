@@ -38,6 +38,14 @@
       color: var(--text-color);
       box-shadow: 0 0 $sc5 var(--back-btn-shadow-color);
 
+      svg {
+        width: 65%;
+
+        * {
+          stroke: var(--text-color);
+          fill: var(--text-color);
+        }
+      }
     }
 
     .title {
