@@ -17,6 +17,19 @@ html, body {
 
 body {
   /*overscroll-behavior: contain;*/
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: $sc1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: $sc1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 * {
