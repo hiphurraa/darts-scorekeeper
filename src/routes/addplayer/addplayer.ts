@@ -9,10 +9,6 @@ const route_addplayer = Vue.component('route_addplayer', {
                 <input ref="nameInput" autocomplete="off" type="text" v-model="name" class="text-input">
                 <div v-if="validationError" class="validation-error">{{ validationError }}</div>            
             </div>
-            
-            <CustomRadio title="Valitse pelaaja alkavaan peliin" :options="autoSelectPlayerOptions"
-                @selected="(o) => {autoSelectPlayerOptions = o}">
-            </CustomRadio>
         
             <div class="button-m default add-player" @click="savePlayer">Tallenna pelaaja</div>
         </div>
@@ -22,10 +18,6 @@ const route_addplayer = Vue.component('route_addplayer', {
     data() {
         return {
             name: "",
-            autoSelectPlayerOptions: [
-                {selected: true, label: "Kyllä", value: true},
-                {selected: false, label: "Ei", value: false}
-            ] as RadioOption[],
             validationError: ""
         }
     },
@@ -45,8 +37,7 @@ const route_addplayer = Vue.component('route_addplayer', {
             }
 
             let name = this.name.trim();
-            let selected = this.autoSelectPlayerOptions.find(o => o.selected).value;
-            if (addPlayer(name, selected)) {
+            if (addPlayer(name, true)) {
                 vibrate();
                 guiState.pageAnimationDirection = "from-right";
                 router.back();
