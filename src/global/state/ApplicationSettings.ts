@@ -2,7 +2,7 @@ const APPLICATION_SETTINGS: string = "darts-scorekeeper-application-settings";
 
 declare interface ApplicationSettings {
     theme: string,
-    language: string
+    language: "en" | "fi"
 }
 
 const defaultApplicationSettings: ApplicationSettings = {

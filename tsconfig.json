@@ -24,6 +24,7 @@
 
     /* Mixins */
     "src/global/mixins/PageMixin.ts",
+    "src/global/mixins/TranslationMixin.ts",
 
     /* Pages */
     "src/routes/mainmenu/mainmenu.ts",
